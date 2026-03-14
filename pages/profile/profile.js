@@ -31,8 +31,37 @@ Page({
   },
 
   goToLogin() {
-    wx.navigateTo({
-      url: '/pages/login/login'
+    wx.showModal({
+      title: '用户登录',
+      content: '请选择登录方式：\n\n• 微信授权登录\n• 手机号码登录\n• 游客模式体验\n\n登录后可享受更多个性化服务！',
+      confirmText: '微信登录',
+      cancelText: '游客模式',
+      success: (res) => {
+        if (res.confirm) {
+          // 模拟微信登录
+          wx.showLoading({ title: '登录中...' })
+          setTimeout(() => {
+            wx.hideLoading()
+            // 模拟登录成功
+            getApp().globalData.isLoggedIn = true
+            getApp().globalData.userInfo = {
+              nickName: '微信用户',
+              avatarUrl: '/images/default-avatar.png'
+            }
+            this.checkLoginStatus()
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success'
+            })
+          }, 1500)
+        } else {
+          // 游客模式
+          wx.showToast({
+            title: '进入游客模式',
+            icon: 'none'
+          })
+        }
+      }
     })
   },
 

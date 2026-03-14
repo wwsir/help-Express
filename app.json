@@ -1,11 +1,8 @@
 {
   "pages": [
-    "pages/delivery/delivery",
+    "pages/receive-delivery/receive-delivery",
     "pages/query/query",
-    "pages/profile/profile",
-    "pages/help-deliver/help-deliver",
-    "pages/have-package/have-package",
-    "pages/login/login"
+    "pages/profile/profile"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,7 +18,7 @@
     "borderStyle": "black",
     "list": [
       {
-        "pagePath": "pages/delivery/delivery",
+        "pagePath": "pages/receive-delivery/receive-delivery",
         "text": "取快递"
       },
       {
@@ -35,6 +32,5 @@
     ]
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

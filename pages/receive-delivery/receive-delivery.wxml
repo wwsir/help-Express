@@ -1,4 +1,4 @@
-<!-- pages/delivery/delivery.wxml -->
+<!-- pages/receive-delivery/receive-delivery.wxml -->
 <view class="container">
   <!-- 页面标题 -->
   <view class="page-header">

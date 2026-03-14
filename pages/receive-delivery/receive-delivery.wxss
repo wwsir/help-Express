@@ -1,4 +1,4 @@
-/* pages/delivery/delivery.wxss */
+/* pages/receive-delivery/receive-delivery.wxss */
 .page-header {
   background: linear-gradient(135deg, #1296db 0%, #0b7ec8 100%);
   color: white;

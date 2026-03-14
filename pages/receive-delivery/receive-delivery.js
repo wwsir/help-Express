@@ -1,4 +1,4 @@
-// pages/delivery/delivery.js
+// pages/receive-delivery/receive-delivery.js
 Page({
   data: {
     recentRequests: [
@@ -47,24 +47,41 @@ Page({
     }, 1000)
   },
 
-  // 跳转到收取快递页面
+  // 发布收取快递需求
   goToReceive() {
-    wx.navigateTo({
-      url: '/pages/have-package/have-package'
+    wx.showModal({
+      title: '发布代取需求',
+      content: '请填写您的快递信息：\n\n• 快递公司：申通快递\n• 取件码：1234\n• 收件人：张先生\n• 联系电话：138****1234\n• 取件地址：万达广场快递点\n• 期望时间：今天下午\n• 服务费用：¥12\n\n发布成功后，会有热心用户帮您代取！',
+      showCancel: false,
+      success: () => {
+        wx.showToast({
+          title: '发布成功',
+          icon: 'success'
+        })
+      }
     })
   },
 
-  // 跳转到代取快递页面
+  // 查看代取快递列表
   goToHelp() {
-    wx.navigateTo({
-      url: '/pages/help-deliver/help-deliver'
+    wx.showActionSheet({
+      itemList: ['查看全部需求', '我的接单记录', '收益统计'],
+      success: (res) => {
+        const actions = ['查看代取需求列表', '查看我的接单记录', '查看收益统计']
+        wx.showToast({
+          title: `${actions[res.tapIndex]}功能开发中`,
+          icon: 'none'
+        })
+      }
     })
   },
 
   // 查看所有需求
   viewAllRequests() {
-    wx.navigateTo({
-      url: '/pages/help-deliver/help-deliver'
+    wx.showModal({
+      title: '全部代取需求',
+      content: '这里将显示所有待接取的快递需求：\n\n• 申通快递 - 电子产品 (¥12)\n• 圆通快递 - 衣物包裹 (¥8)\n• 中通快递 - 文件资料 (¥15)\n• 韵达快递 - 生活用品 (¥10)\n• 顺丰快递 - 重要文件 (¥20)\n\n更多需求正在加载中...',
+      showCancel: false
     })
   },
 
