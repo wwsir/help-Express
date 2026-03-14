@@ -1,4 +1,4 @@
-// pages/profile/profile.js
+// pages/my-profile/profile.js
 const app = getApp()
 
 Page({
