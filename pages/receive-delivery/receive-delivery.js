@@ -112,7 +112,15 @@ Page({
       trackingNumber: '',
       pickupCode: ''
     },
-    isFormValid: false
+    isFormValid: false,
+    // 发布成功详情模态框
+    showSuccessModal: false,
+    successDetails: {
+      receiverName: '',
+      receiverPhone: '',
+      trackingNumber: '',
+      pickupCode: ''
+    }
   },
 
   onLoad() {
@@ -217,6 +225,19 @@ Page({
     })
   },
 
+  // 关闭发布成功模态框
+  closeSuccessModal() {
+    this.setData({
+      showSuccessModal: false,
+      successDetails: {
+        receiverName: '',
+        receiverPhone: '',
+        trackingNumber: '',
+        pickupCode: ''
+      }
+    })
+  },
+
   // 提交发布表单
   submitPublishForm() {
     const { receiverName, receiverPhone, trackingNumber, pickupCode } = this.data.publishForm
@@ -239,10 +260,14 @@ Page({
 
       // 显示发布成功详情
       setTimeout(() => {
-        wx.showModal({
-          title: '发布成功',
-          content: `收件信息已发布：\n\n收件人：${receiverName}\n手机号：${receiverPhone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}\n快递单号：${trackingNumber}\n取件码：${pickupCode}\n\n等待好心人帮您代取！`,
-          showCancel: false
+        this.setData({
+          showSuccessModal: true,
+          successDetails: {
+            receiverName: receiverName,
+            receiverPhone: receiverPhone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'),
+            trackingNumber: trackingNumber,
+            pickupCode: pickupCode
+          }
         })
       }, 1500)
     }, 1500)

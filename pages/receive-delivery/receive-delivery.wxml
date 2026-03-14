@@ -254,4 +254,46 @@
       </view>
     </view>
   </view>
+
+  <!-- 发布成功详情模态框 -->
+  <view class="success-modal" wx:if="{{showSuccessModal}}">
+    <view class="success-content">
+      <view class="success-header">
+        <view class="success-title">发布成功</view>
+        <view class="success-close" bindtap="closeSuccessModal">×</view>
+      </view>
+      
+      <view class="success-body">
+        <view class="success-message">收件信息已发布：</view>
+        
+        <view class="success-details">
+          <view class="detail-item">
+            <view class="detail-label">收件人：</view>
+            <view class="detail-value">{{successDetails.receiverName}}</view>
+          </view>
+          
+          <view class="detail-item">
+            <view class="detail-label">手机号：</view>
+            <view class="detail-value">{{successDetails.receiverPhone}}</view>
+          </view>
+          
+          <view class="detail-item">
+            <view class="detail-label">快递单号：</view>
+            <view class="detail-value">{{successDetails.trackingNumber}}</view>
+          </view>
+          
+          <view class="detail-item">
+            <view class="detail-label">取件码：</view>
+            <view class="detail-value pickup-code">{{successDetails.pickupCode}}</view>
+          </view>
+        </view>
+        
+        <view class="success-footer">等待好心人帮您代取！</view>
+      </view>
+      
+      <view class="success-actions">
+        <button class="success-btn" bindtap="closeSuccessModal">确定</button>
+      </view>
+    </view>
+  </view>
 </view>
