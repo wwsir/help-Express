@@ -528,14 +528,14 @@
 .package-item {
   background-color: white;
   border-radius: 12rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .package-content {
   display: flex;
-  padding: 25rpx;
+  padding: 15rpx 20rpx;
 }
 
 .select-box {
@@ -553,7 +553,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 12rpx;
 }
 
 .package-number {
@@ -580,7 +580,7 @@
 }
 
 .package-details {
-  margin-bottom: 20rpx;
+  margin-bottom: 0;
 }
 
 .detail-row {
@@ -597,7 +597,7 @@
 .detail-line {
   display: block;
   width: 100%;
-  margin-bottom: 12rpx;
+  margin-bottom: 8rpx;
 }
 
 .detail-line:last-child {
