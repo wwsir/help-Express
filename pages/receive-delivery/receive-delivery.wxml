@@ -86,7 +86,7 @@
   <view wx:if="{{currentPage === 'publish'}}">
     <!-- 页面标题 -->
     <view class="page-header">
-      <view class="header-back" bindtap="backToMain">‹ 返回</view>
+      <view class="header-back" bindtap="backToMain">‹</view>
       <view class="header-title">收取快递</view>
       <view class="header-desc">选择发布收件信息的方式</view>
     </view>
@@ -128,7 +128,7 @@
   <view wx:if="{{currentPage === 'pickupList'}}">
     <!-- 页面标题 -->
     <view class="page-header">
-      <view class="header-back" bindtap="backToMain">‹ 返回</view>
+      <view class="header-back" bindtap="backToMain">‹</view>
       <view class="header-title">代取快递</view>
       <view class="header-desc">选择要代取的快递包裹</view>
     </view>
