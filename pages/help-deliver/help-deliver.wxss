@@ -1,0 +1,113 @@
+/* pages/help-deliver/help-deliver.wxss */
+.filter-bar {
+  display: flex;
+  gap: 20rpx;
+  margin: 20rpx 0;
+}
+
+.filter-item {
+  flex: 1;
+  background-color: white;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  border: 1rpx solid #e5e5e5;
+}
+
+.package-list {
+  margin: 20rpx 0;
+}
+
+.package-item {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.package-item:active {
+  background-color: #f9f9f9;
+}
+
+.package-info {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.package-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.package-detail {
+  margin-bottom: 15rpx;
+}
+
+.detail-item {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.package-desc {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 1.4;
+}
+
+.package-price {
+  text-align: center;
+  min-width: 100rpx;
+}
+
+.price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1296db;
+}
+
+.unit {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 5rpx;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 20rpx;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+  color: #666;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.refresh-section {
+  margin: 40rpx 0;
+  text-align: center;
+}
+
+.refresh-section .btn {
+  width: 200rpx;
+}

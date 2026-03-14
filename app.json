@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/delivery/delivery",
+    "pages/query/query",
+    "pages/profile/profile",
+    "pages/help-deliver/help-deliver",
+    "pages/have-package/have-package",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1296db",
+    "navigationBarTitleText": "快递帮取",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/delivery/delivery",
+        "text": "取快递"
+      },
+      {
+        "pagePath": "pages/query/query",
+        "text": "查快递"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

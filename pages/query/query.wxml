@@ -1,0 +1,108 @@
+<!-- pages/query/query.wxml -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-title">快递查询</view>
+    <view class="header-desc">输入快递单号查询物流信息</view>
+  </view>
+
+  <!-- 查询表单 -->
+  <view class="query-section">
+    <view class="query-form">
+      <view class="form-item">
+        <view class="form-label">快递公司</view>
+        <picker bindchange="onCompanyChange" value="{{companyIndex}}" range="{{companyList}}" range-key="name">
+          <view class="form-picker">
+            <text>{{companyList[companyIndex].name}}</text>
+            <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">快递单号</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入快递单号" 
+          value="{{trackingNumber}}" 
+          bindinput="onTrackingNumberInput"
+          maxlength="30"
+        />
+      </view>
+
+      <button class="query-btn" bindtap="queryExpress" disabled="{{!trackingNumber}}">
+        <text wx:if="{{!isQuerying}}">查询物流</text>
+        <text wx:if="{{isQuerying}}">查询中...</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 查询结果 -->
+  <view class="result-section" wx:if="{{queryResult}}">
+    <!-- 快递状态 -->
+    <view class="status-card">
+      <view class="status-header">
+        <view class="status-title">{{queryResult.status}}</view>
+        <view class="status-company">{{queryResult.company}}</view>
+      </view>
+      <view class="status-info">
+        <view class="tracking-number">单号：{{queryResult.trackingNumber}}</view>
+        <view class="update-time">更新时间：{{queryResult.updateTime}}</view>
+      </view>
+    </view>
+
+    <!-- 物流轨迹 -->
+    <view class="timeline-section">
+      <view class="timeline-title">物流轨迹</view>
+      <view class="timeline-list">
+        <view class="timeline-item" wx:for="{{queryResult.timeline}}" wx:key="index">
+          <view class="timeline-dot {{index === 0 ? 'active' : ''}}"></view>
+          <view class="timeline-content">
+            <view class="timeline-time">{{item.time}}</view>
+            <view class="timeline-desc">{{item.desc}}</view>
+            <view class="timeline-location" wx:if="{{item.location}}">{{item.location}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 查询历史 -->
+  <view class="history-section" wx:if="{{queryHistory.length > 0}}">
+    <view class="section-header">
+      <view class="section-title">查询历史</view>
+      <view class="section-action" bindtap="clearHistory">清空</view>
+    </view>
+    
+    <view class="history-list">
+      <view class="history-item" wx:for="{{queryHistory}}" wx:key="id" bindtap="quickQuery" data-item="{{item}}">
+        <view class="history-info">
+          <view class="history-company">{{item.company}}</view>
+          <view class="history-number">{{item.trackingNumber}}</view>
+          <view class="history-time">{{item.queryTime}}</view>
+        </view>
+        <view class="history-action">
+          <text class="quick-query">快速查询</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 帮助信息 -->
+  <view class="help-section">
+    <view class="help-title">查询说明</view>
+    <view class="help-content">
+      <view class="help-item">• 支持主流快递公司查询</view>
+      <view class="help-item">• 请确保单号输入正确</view>
+      <view class="help-item">• 查询结果仅供参考</view>
+      <view class="help-item">• 如有疑问请联系快递公司</view>
+    </view>
+  </view>
+
+  <!-- 无结果状态 -->
+  <view class="no-result" wx:if="{{showNoResult}}">
+    <view class="no-result-icon">📦</view>
+    <view class="no-result-text">未查询到物流信息</view>
+    <view class="no-result-desc">请检查快递单号是否正确</view>
+  </view>
+</view>

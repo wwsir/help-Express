@@ -1,0 +1,53 @@
+<!-- pages/help-deliver/help-deliver.wxml -->
+<view class="container">
+  <view class="card">
+    <view class="title">我帮取快递</view>
+    <view class="text">查看附近需要代取的快递，赚取服务费</view>
+  </view>
+
+  <!-- 筛选条件 -->
+  <view class="filter-bar">
+    <picker bindchange="onDistanceChange" value="{{distanceIndex}}" range="{{distanceRange}}">
+      <view class="filter-item">
+        距离：{{distanceRange[distanceIndex]}}
+      </view>
+    </picker>
+    
+    <picker bindchange="onPriceChange" value="{{priceIndex}}" range="{{priceRange}}">
+      <view class="filter-item">
+        价格：{{priceRange[priceIndex]}}
+      </view>
+    </picker>
+  </view>
+
+  <!-- 快递列表 -->
+  <view class="package-list">
+    <view class="package-item" wx:for="{{packageList}}" wx:key="id" bindtap="selectPackage" data-id="{{item.id}}">
+      <view class="package-info">
+        <view class="package-title">{{item.title}}</view>
+        <view class="package-detail">
+          <text class="detail-item">📍 {{item.location}}</text>
+          <text class="detail-item">📦 {{item.size}}</text>
+          <text class="detail-item">⏰ {{item.deadline}}</text>
+        </view>
+        <view class="package-desc">{{item.description}}</view>
+      </view>
+      <view class="package-price">
+        <text class="price">¥{{item.price}}</text>
+        <text class="unit">元</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{packageList.length === 0}}">
+    <view class="empty-icon">📦</view>
+    <view class="empty-text">暂无代取快递</view>
+    <view class="empty-desc">稍后再来看看吧</view>
+  </view>
+
+  <!-- 刷新按钮 -->
+  <view class="refresh-section">
+    <button class="btn" bindtap="refreshList">刷新列表</button>
+  </view>
+</view>

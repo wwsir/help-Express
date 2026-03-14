@@ -1,0 +1,81 @@
+<!-- pages/delivery/delivery.wxml -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-title">快递服务</view>
+    <view class="header-desc">选择您需要的快递服务</view>
+  </view>
+
+  <!-- 服务选项 -->
+  <view class="service-options">
+    <view class="option-card" bindtap="goToReceive">
+      <view class="option-icon">📦</view>
+      <view class="option-info">
+        <view class="option-title">收取快递</view>
+        <view class="option-desc">发布快递收取需求，让别人帮您取快递</view>
+      </view>
+      <view class="option-arrow">></view>
+    </view>
+
+    <view class="option-card" bindtap="goToHelp">
+      <view class="option-icon">🚚</view>
+      <view class="option-info">
+        <view class="option-title">代取快递</view>
+        <view class="option-desc">查看附近的代取需求，帮助他人取快递赚取收益</view>
+      </view>
+      <view class="option-arrow">></view>
+    </view>
+  </view>
+
+  <!-- 最新需求 -->
+  <view class="recent-section">
+    <view class="section-header">
+      <view class="section-title">最新需求</view>
+      <view class="section-more" bindtap="viewAllRequests">查看更多</view>
+    </view>
+    
+    <view class="request-list">
+      <view class="request-item" wx:for="{{recentRequests}}" wx:key="id">
+        <view class="request-info">
+          <view class="request-title">{{item.title}}</view>
+          <view class="request-detail">
+            <text class="detail-item">📍 {{item.location}}</text>
+            <text class="detail-item">⏰ {{item.time}}</text>
+            <text class="detail-item price">💰 ¥{{item.price}}</text>
+          </view>
+        </view>
+        <view class="request-action">
+          <button class="action-btn" bindtap="takeOrder" data-id="{{item.id}}">接单</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{recentRequests.length === 0}}">
+      <view class="empty-icon">🈳</view>
+      <view class="empty-text">暂无最新需求</view>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-section">
+    <view class="stats-grid">
+      <view class="stats-item">
+        <view class="stats-number">{{stats.todayRequests}}</view>
+        <view class="stats-label">今日需求</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-number">{{stats.activeHelpers}}</view>
+        <view class="stats-label">在线帮手</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-number">{{stats.avgPrice}}</view>
+        <view class="stats-label">平均价格</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-number">{{stats.avgTime}}</view>
+        <view class="stats-label">平均时长</view>
+      </view>
+    </view>
+  </view>
+</view>

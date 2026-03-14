@@ -1,0 +1,183 @@
+/* pages/have-package/have-package.wxss */
+.form-section {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 15rpx;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.form-input:focus {
+  border-color: #1296db;
+  background-color: white;
+}
+
+.form-picker {
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 120rpx;
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  background-color: #f9f9f9;
+  line-height: 1.5;
+}
+
+.form-textarea:focus {
+  border-color: #1296db;
+  background-color: white;
+}
+
+.my-requests {
+  margin: 40rpx 0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding: 0 20rpx;
+}
+
+.request-list {
+  margin: 20rpx 0;
+}
+
+.request-item {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.request-info {
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.request-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15rpx;
+}
+
+.request-detail {
+  margin-bottom: 15rpx;
+}
+
+.detail-text {
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.request-status {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-accepted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-completed {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.request-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.action-btn {
+  padding: 15rpx 25rpx;
+  font-size: 24rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #1296db;
+  color: #1296db;
+  background-color: white;
+  min-width: 80rpx;
+}
+
+.action-btn:active {
+  background-color: #f0f8ff;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80rpx 20rpx;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+  color: #666;
+}
+
+.empty-desc {
+  font-size: 26rpx;
+  color: #999;
+}

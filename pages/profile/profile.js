@@ -1,0 +1,117 @@
+// pages/profile/profile.js
+const app = getApp()
+
+Page({
+  data: {
+    isLoggedIn: false,
+    userInfo: {},
+    stats: {
+      helpCount: 0,
+      publishCount: 0,
+      totalEarning: 0,
+      rating: 5.0,
+      myReceiveOrders: 0,
+      myHelpOrders: 0
+    }
+  },
+
+  onLoad() {
+    this.checkLoginStatus()
+  },
+
+  onShow() {
+    this.checkLoginStatus()
+  },
+
+  checkLoginStatus() {
+    this.setData({
+      isLoggedIn: app.globalData.isLoggedIn,
+      userInfo: app.globalData.userInfo
+    })
+  },
+
+  goToLogin() {
+    wx.navigateTo({
+      url: '/pages/login/login'
+    })
+  },
+
+  goToMyOrders() {
+    wx.showToast({
+      title: '功能开发中',
+      icon: 'none'
+    })
+  },
+
+  goToMyEarnings() {
+    wx.showModal({
+      title: '我的收益',
+      content: `累计收益：¥${this.data.stats.totalEarning}\n帮取收益：¥120\n推荐奖励：¥48`,
+      showCancel: false
+    })
+  },
+
+  goToSettings() {
+    wx.showActionSheet({
+      itemList: ['消息通知', '隐私设置', '账号安全', '清除缓存'],
+      success: (res) => {
+        const actions = ['消息通知', '隐私设置', '账号安全', '清除缓存']
+        wx.showToast({
+          title: `${actions[res.tapIndex]}功能开发中`,
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  goToHelp() {
+    wx.showModal({
+      title: '帮助中心',
+      content: '1. 如何发布代取需求？\n2. 如何接单帮取快递？\n3. 服务费用标准\n4. 安全保障措施\n\n如需更多帮助，请联系客服：400-123-4567',
+      showCancel: false
+    })
+  },
+
+  goToAbout() {
+    wx.showModal({
+      title: '关于快递帮取',
+      content: '快递帮取是一个互助服务平台，致力于为用户提供便捷的快递代取服务。\n\n版本：v1.0.0\n开发者：快递帮取团队',
+      showCancel: false
+    })
+  },
+
+  // 我的收取快递
+  goToMyReceiveOrders() {
+    wx.showModal({
+      title: '我的收取快递',
+      content: '这里将显示您发布的代取快递需求：\n\n• 待接单：2个\n• 进行中：1个\n• 已完成：15个\n• 已取消：1个\n\n功能正在开发中...',
+      showCancel: false
+    })
+  },
+
+  // 我的代取快递
+  goToMyHelpOrders() {
+    wx.showModal({
+      title: '我的代取快递',
+      content: '这里将显示您接取的帮助订单：\n\n• 进行中：3个\n• 已完成：28个\n• 获得好评：26个\n• 服务评分：4.9分\n\n功能正在开发中...',
+      showCancel: false
+    })
+  },
+
+  handleLogout() {
+    wx.showModal({
+      title: '确认退出',
+      content: '确定要退出登录吗？',
+      success: (res) => {
+        if (res.confirm) {
+          app.logout()
+          this.checkLoginStatus()
+          wx.showToast({
+            title: '已退出登录',
+            icon: 'success'
+          })
+        }
+      }
+    })
+  }
+})

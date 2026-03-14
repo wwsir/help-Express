@@ -1,0 +1,41 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <view class="card">
+    <view class="title">用户登录</view>
+    <view class="text">请使用微信账号登录快递帮取服务</view>
+    
+    <view class="login-section">
+      <button class="btn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">
+        微信授权登录
+      </button>
+      
+      <button class="btn btn-secondary" bindtap="guestLogin">
+        游客登录
+      </button>
+    </view>
+    
+    <view class="tips">
+      <text class="text">登录后可以享受完整的快递帮取服务</text>
+    </view>
+  </view>
+
+  <view class="features">
+    <view class="feature-item">
+      <view class="feature-icon">🚀</view>
+      <view class="feature-text">快速匹配</view>
+      <view class="feature-desc">智能匹配附近的帮取需求</view>
+    </view>
+    
+    <view class="feature-item">
+      <view class="feature-icon">🛡️</view>
+      <view class="feature-text">安全可靠</view>
+      <view class="feature-desc">实名认证，保障服务安全</view>
+    </view>
+    
+    <view class="feature-item">
+      <view class="feature-icon">💰</view>
+      <view class="feature-text">收益透明</view>
+      <view class="feature-desc">明确的服务费用标准</view>
+    </view>
+  </view>
+</view>
