@@ -59,7 +59,7 @@ Page({
   },
 
   // 点击收取快递，进入收取快递页面
-  goToReceive() {
+  goToReceiveExpress() {
     this.setData({
       currentPage: 'publish'
     })
@@ -206,7 +206,7 @@ Page({
   },
 
   // 查看代取快递列表
-  goToHelp() {
+  goToHelpExpress() {
     wx.showActionSheet({
       itemList: ['查看全部需求', '我的接单记录', '收益统计'],
       success: (res) => {

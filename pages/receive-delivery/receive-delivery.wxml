@@ -10,20 +10,20 @@
 
     <!-- 服务选项 -->
     <view class="service-options">
-      <view class="option-card" bindtap="goToReceive">
+      <view class="option-card" bindtap="goToReceiveExpress">
         <view class="option-icon">📦</view>
         <view class="option-info">
           <view class="option-title">收取快递</view>
-          <view class="option-desc">发布快递收取需求，让别人帮您取快递</view>
+          <view class="option-desc">登记取件信息,让有交通工具的乡亲帮您取快递,每件2元代取费</view>
         </view>
         <view class="option-arrow">></view>
       </view>
 
-      <view class="option-card" bindtap="goToHelp">
+      <view class="option-card" bindtap="goToHelpExpress">
         <view class="option-icon">🚚</view>
         <view class="option-info">
           <view class="option-title">代取快递</view>
-          <view class="option-desc">查看附近的代取需求，帮助他人取快递赚取收益</view>
+          <view class="option-desc">如果您有交通工具又有责任心,欢迎帮助乡亲们代取快递</view>
         </view>
         <view class="option-arrow">></view>
       </view>
