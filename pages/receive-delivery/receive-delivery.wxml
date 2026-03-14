@@ -124,64 +124,6 @@
     </view>
   </view>
 
-  <!-- 文字发布菜单页面 -->
-  <view wx:if="{{currentPage === 'textPublish'}}">
-    <!-- 页面标题 -->
-    <view class="page-header">
-      <view class="header-back" bindtap="backToPublish">‹ 返回</view>
-      <view class="header-title">文字发布收件信息</view>
-      <view class="header-desc">选择信息获取方式</view>
-    </view>
-
-    <!-- 文字发布选项菜单 -->
-    <view class="text-publish-menu">
-      <view class="text-menu-item" bindtap="showManualForm">
-        <view class="text-menu-icon">✏️</view>
-        <view class="text-menu-info">
-          <view class="text-menu-title">手动填写收件信息</view>
-          <view class="text-menu-desc">逐项输入收件人、快递单号等信息</view>
-        </view>
-        <view class="text-menu-arrow">></view>
-      </view>
-
-      <view class="text-menu-item" bindtap="scanQRCode">
-        <view class="text-menu-icon">📱</view>
-        <view class="text-menu-info">
-          <view class="text-menu-title">扫码获取快递信息</view>
-          <view class="text-menu-desc">扫描快递单二维码自动获取信息（开发中）</view>
-        </view>
-        <view class="text-menu-arrow">></view>
-      </view>
-
-      <view class="text-menu-item" bindtap="importFromSMS">
-        <view class="text-menu-icon">💬</view>
-        <view class="text-menu-info">
-          <view class="text-menu-title">从短信导入信息</view>
-          <view class="text-menu-desc">从快递通知短信中提取信息（开发中）</view>
-        </view>
-        <view class="text-menu-arrow">></view>
-      </view>
-    </view>
-
-    <!-- 功能说明 -->
-    <view class="feature-section">
-      <view class="feature-title">功能说明</view>
-      <view class="feature-content">
-        <view class="feature-item">
-          <view class="feature-name">✏️ 手动填写</view>
-          <view class="feature-desc">适用于已知完整收件信息的情况，准确度最高</view>
-        </view>
-        <view class="feature-item">
-          <view class="feature-name">📱 扫码获取</view>
-          <view class="feature-desc">通过扫描快递单上的二维码快速获取信息</view>
-        </view>
-        <view class="feature-item">
-          <view class="feature-name">💬 短信导入</view>
-          <view class="feature-desc">从快递公司发送的通知短信中智能提取信息</view>
-        </view>
-      </view>
-    </view>
-  </view>
 
   <!-- 收件信息发布表单 -->
   <view class="publish-form" wx:if="{{showPublishForm}}">

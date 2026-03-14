@@ -2,7 +2,7 @@
 Page({
   data: {
     // 页面状态控制
-    currentPage: 'main', // main: 主页面, publish: 收取快递页面, textPublish: 文字发布菜单页面
+    currentPage: 'main', // main: 主页面, publish: 收取快递页面
     recentRequests: [
       {
         id: 1,
@@ -72,17 +72,10 @@ Page({
     })
   },
 
-  // 返回收取快递页面
-  backToPublish() {
-    this.setData({
-      currentPage: 'publish'
-    })
-  },
-
-  // 选择文字发布，进入文字发布菜单页面
+  // 选择文字发布，直接弹出表单
   selectTextPublish() {
     this.setData({
-      currentPage: 'textPublish'
+      showPublishForm: true
     })
   },
 
@@ -90,29 +83,6 @@ Page({
   selectImagePublish() {
     wx.showToast({
       title: '图片发布功能开发中',
-      icon: 'none'
-    })
-  },
-
-  // 手动填写表单
-  showManualForm() {
-    this.setData({
-      showPublishForm: true
-    })
-  },
-
-  // 扫码获取信息（新功能）
-  scanQRCode() {
-    wx.showToast({
-      title: '扫码功能开发中',
-      icon: 'none'
-    })
-  },
-
-  // 从短信导入（新功能）
-  importFromSMS() {
-    wx.showToast({
-      title: '短信导入功能开发中',
       icon: 'none'
     })
   },
