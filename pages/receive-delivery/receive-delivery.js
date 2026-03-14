@@ -1,6 +1,8 @@
 // pages/receive-delivery/receive-delivery.js
 Page({
   data: {
+    // 页面状态控制
+    currentPage: 'main', // main: 主页面, publish: 收取快递页面, textPublish: 文字发布菜单页面
     recentRequests: [
       {
         id: 1,
@@ -29,7 +31,16 @@ Page({
       activeHelpers: 156,
       avgPrice: '¥10',
       avgTime: '30分钟'
-    }
+    },
+    // 发布表单控制
+    showPublishForm: false,
+    publishForm: {
+      receiverName: '',
+      receiverPhone: '',
+      trackingNumber: '',
+      pickupCode: ''
+    },
+    isFormValid: false
   },
 
   onLoad() {
@@ -47,19 +58,151 @@ Page({
     }, 1000)
   },
 
-  // 发布收取快递需求
+  // 点击收取快递，进入收取快递页面
   goToReceive() {
-    wx.showModal({
-      title: '发布代取需求',
-      content: '请填写您的快递信息：\n\n• 快递公司：申通快递\n• 取件码：1234\n• 收件人：张先生\n• 联系电话：138****1234\n• 取件地址：万达广场快递点\n• 期望时间：今天下午\n• 服务费用：¥12\n\n发布成功后，会有热心用户帮您代取！',
-      showCancel: false,
-      success: () => {
-        wx.showToast({
-          title: '发布成功',
-          icon: 'success'
-        })
-      }
+    this.setData({
+      currentPage: 'publish'
     })
+  },
+
+  // 返回主页面
+  backToMain() {
+    this.setData({
+      currentPage: 'main'
+    })
+  },
+
+  // 返回收取快递页面
+  backToPublish() {
+    this.setData({
+      currentPage: 'publish'
+    })
+  },
+
+  // 选择文字发布，进入文字发布菜单页面
+  selectTextPublish() {
+    this.setData({
+      currentPage: 'textPublish'
+    })
+  },
+
+  // 选择图片发布（暂未实现）
+  selectImagePublish() {
+    wx.showToast({
+      title: '图片发布功能开发中',
+      icon: 'none'
+    })
+  },
+
+  // 手动填写表单
+  showManualForm() {
+    this.setData({
+      showPublishForm: true
+    })
+  },
+
+  // 扫码获取信息（新功能）
+  scanQRCode() {
+    wx.showToast({
+      title: '扫码功能开发中',
+      icon: 'none'
+    })
+  },
+
+  // 从短信导入（新功能）
+  importFromSMS() {
+    wx.showToast({
+      title: '短信导入功能开发中',
+      icon: 'none'
+    })
+  },
+
+  // 关闭发布表单
+  closePublishForm() {
+    this.setData({
+      showPublishForm: false,
+      publishForm: {
+        receiverName: '',
+        receiverPhone: '',
+        trackingNumber: '',
+        pickupCode: ''
+      },
+      isFormValid: false
+    })
+  },
+
+  // 表单输入处理
+  onReceiverNameInput(e) {
+    this.setData({
+      'publishForm.receiverName': e.detail.value
+    })
+    this.validateForm()
+  },
+
+  onReceiverPhoneInput(e) {
+    this.setData({
+      'publishForm.receiverPhone': e.detail.value
+    })
+    this.validateForm()
+  },
+
+  onTrackingNumberInput(e) {
+    this.setData({
+      'publishForm.trackingNumber': e.detail.value
+    })
+    this.validateForm()
+  },
+
+  onPickupCodeInput(e) {
+    this.setData({
+      'publishForm.pickupCode': e.detail.value
+    })
+    this.validateForm()
+  },
+
+  // 验证表单
+  validateForm() {
+    const { receiverName, receiverPhone, trackingNumber, pickupCode } = this.data.publishForm
+    const isValid = receiverName.trim() && 
+                   receiverPhone.trim() && 
+                   trackingNumber.trim() && 
+                   pickupCode.trim() &&
+                   /^1[3-9]\d{9}$/.test(receiverPhone.trim()) // 简单手机号验证
+    
+    this.setData({
+      isFormValid: isValid
+    })
+  },
+
+  // 提交发布表单
+  submitPublishForm() {
+    const { receiverName, receiverPhone, trackingNumber, pickupCode } = this.data.publishForm
+    
+    wx.showLoading({
+      title: '发布中...'
+    })
+
+    // 模拟发布请求
+    setTimeout(() => {
+      wx.hideLoading()
+      
+      // 重置表单
+      this.closePublishForm()
+      
+      wx.showToast({
+        title: '发布成功',
+        icon: 'success'
+      })
+
+      // 显示发布成功详情
+      setTimeout(() => {
+        wx.showModal({
+          title: '发布成功',
+          content: `收件信息已发布：\n\n收件人：${receiverName}\n手机号：${receiverPhone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}\n快递单号：${trackingNumber}\n取件码：${pickupCode}\n\n等待好心人帮您代取！`,
+          showCancel: false
+        })
+      }, 1500)
+    }, 1500)
   },
 
   // 查看代取快递列表

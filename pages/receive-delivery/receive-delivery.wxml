@@ -1,80 +1,244 @@
 <!-- pages/receive-delivery/receive-delivery.wxml -->
 <view class="container">
-  <!-- 页面标题 -->
-  <view class="page-header">
-    <view class="header-title">快递服务</view>
-    <view class="header-desc">选择您需要的快递服务</view>
-  </view>
+  <!-- 主页面 -->
+  <view wx:if="{{currentPage === 'main'}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="header-title">快递服务</view>
+      <view class="header-desc">选择您需要的快递服务</view>
+    </view>
 
-  <!-- 服务选项 -->
-  <view class="service-options">
-    <view class="option-card" bindtap="goToReceive">
-      <view class="option-icon">📦</view>
-      <view class="option-info">
-        <view class="option-title">收取快递</view>
-        <view class="option-desc">发布快递收取需求，让别人帮您取快递</view>
+    <!-- 服务选项 -->
+    <view class="service-options">
+      <view class="option-card" bindtap="goToReceive">
+        <view class="option-icon">📦</view>
+        <view class="option-info">
+          <view class="option-title">收取快递</view>
+          <view class="option-desc">发布快递收取需求，让别人帮您取快递</view>
+        </view>
+        <view class="option-arrow">></view>
       </view>
-      <view class="option-arrow">></view>
-    </view>
 
-    <view class="option-card" bindtap="goToHelp">
-      <view class="option-icon">🚚</view>
-      <view class="option-info">
-        <view class="option-title">代取快递</view>
-        <view class="option-desc">查看附近的代取需求，帮助他人取快递赚取收益</view>
+      <view class="option-card" bindtap="goToHelp">
+        <view class="option-icon">🚚</view>
+        <view class="option-info">
+          <view class="option-title">代取快递</view>
+          <view class="option-desc">查看附近的代取需求，帮助他人取快递赚取收益</view>
+        </view>
+        <view class="option-arrow">></view>
       </view>
-      <view class="option-arrow">></view>
     </view>
-  </view>
 
-  <!-- 最新需求 -->
-  <view class="recent-section">
-    <view class="section-header">
-      <view class="section-title">最新需求</view>
-      <view class="section-more" bindtap="viewAllRequests">查看更多</view>
-    </view>
-    
-    <view class="request-list">
-      <view class="request-item" wx:for="{{recentRequests}}" wx:key="id">
-        <view class="request-info">
-          <view class="request-title">{{item.title}}</view>
-          <view class="request-detail">
-            <text class="detail-item">📍 {{item.location}}</text>
-            <text class="detail-item">⏰ {{item.time}}</text>
-            <text class="detail-item price">💰 ¥{{item.price}}</text>
+    <!-- 最新代取 -->
+    <view class="recent-section">
+      <view class="section-header">
+        <view class="section-title">最新代取</view>
+        <view class="section-more" bindtap="viewAllRequests">查看更多</view>
+      </view>
+      
+      <view class="request-list">
+        <view class="request-item" wx:for="{{recentRequests}}" wx:key="id">
+          <view class="request-info">
+            <view class="request-title">{{item.title}}</view>
+            <view class="request-detail">
+              <text class="detail-item">📍 {{item.location}}</text>
+              <text class="detail-item">⏰ {{item.time}}</text>
+              <text class="detail-item price">💰 ¥{{item.price}}</text>
+            </view>
+          </view>
+          <view class="request-action">
+            <button class="action-btn" bindtap="takeOrder" data-id="{{item.id}}">接单</button>
           </view>
         </view>
-        <view class="request-action">
-          <button class="action-btn" bindtap="takeOrder" data-id="{{item.id}}">接单</button>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{recentRequests.length === 0}}">
+        <view class="empty-icon">🈳</view>
+        <view class="empty-text">暂无最新代取</view>
+      </view>
+    </view>
+
+    <!-- 统计信息 -->
+    <view class="stats-section">
+      <view class="stats-grid">
+        <view class="stats-item">
+          <view class="stats-number">{{stats.todayRequests}}</view>
+          <view class="stats-label">今日需求</view>
+        </view>
+        <view class="stats-item">
+          <view class="stats-number">{{stats.activeHelpers}}</view>
+          <view class="stats-label">在线帮手</view>
+        </view>
+        <view class="stats-item">
+          <view class="stats-number">{{stats.avgPrice}}</view>
+          <view class="stats-label">平均价格</view>
+        </view>
+        <view class="stats-item">
+          <view class="stats-number">{{stats.avgTime}}</view>
+          <view class="stats-label">平均时长</view>
         </view>
       </view>
     </view>
+  </view>
 
-    <!-- 空状态 -->
-    <view class="empty-state" wx:if="{{recentRequests.length === 0}}">
-      <view class="empty-icon">🈳</view>
-      <view class="empty-text">暂无最新需求</view>
+  <!-- 收取快递页面 -->
+  <view wx:if="{{currentPage === 'publish'}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="header-back" bindtap="backToMain">‹ 返回</view>
+      <view class="header-title">收取快递</view>
+      <view class="header-desc">选择发布收件信息的方式</view>
+    </view>
+
+    <!-- 发布选项菜单 -->
+    <view class="publish-menu">
+      <view class="menu-item" bindtap="selectTextPublish">
+        <view class="menu-icon">📝</view>
+        <view class="menu-info">
+          <view class="menu-title">文字发布收件信息</view>
+          <view class="menu-desc">手动输入收件人信息、快递单号等</view>
+        </view>
+        <view class="menu-arrow">></view>
+      </view>
+
+      <view class="menu-item" bindtap="selectImagePublish">
+        <view class="menu-icon">📷</view>
+        <view class="menu-info">
+          <view class="menu-title">图片发布取件信息</view>
+          <view class="menu-desc">拍照上传取件码截图（开发中）</view>
+        </view>
+        <view class="menu-arrow">></view>
+      </view>
+    </view>
+
+    <!-- 使用说明 -->
+    <view class="help-section">
+      <view class="help-title">使用说明</view>
+      <view class="help-content">
+        <view class="help-item">• 文字发布：手动输入收件信息，适合已知详细信息</view>
+        <view class="help-item">• 图片发布：直接拍摄取件码，快速便捷（即将上线）</view>
+        <view class="help-item">• 发布后会有热心用户帮您代取快递</view>
+        <view class="help-item">• 请确保信息准确，以便顺利完成代取</view>
+      </view>
     </view>
   </view>
 
-  <!-- 统计信息 -->
-  <view class="stats-section">
-    <view class="stats-grid">
-      <view class="stats-item">
-        <view class="stats-number">{{stats.todayRequests}}</view>
-        <view class="stats-label">今日需求</view>
+  <!-- 文字发布菜单页面 -->
+  <view wx:if="{{currentPage === 'textPublish'}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="header-back" bindtap="backToPublish">‹ 返回</view>
+      <view class="header-title">文字发布收件信息</view>
+      <view class="header-desc">选择信息获取方式</view>
+    </view>
+
+    <!-- 文字发布选项菜单 -->
+    <view class="text-publish-menu">
+      <view class="text-menu-item" bindtap="showManualForm">
+        <view class="text-menu-icon">✏️</view>
+        <view class="text-menu-info">
+          <view class="text-menu-title">手动填写收件信息</view>
+          <view class="text-menu-desc">逐项输入收件人、快递单号等信息</view>
+        </view>
+        <view class="text-menu-arrow">></view>
       </view>
-      <view class="stats-item">
-        <view class="stats-number">{{stats.activeHelpers}}</view>
-        <view class="stats-label">在线帮手</view>
+
+      <view class="text-menu-item" bindtap="scanQRCode">
+        <view class="text-menu-icon">📱</view>
+        <view class="text-menu-info">
+          <view class="text-menu-title">扫码获取快递信息</view>
+          <view class="text-menu-desc">扫描快递单二维码自动获取信息（开发中）</view>
+        </view>
+        <view class="text-menu-arrow">></view>
       </view>
-      <view class="stats-item">
-        <view class="stats-number">{{stats.avgPrice}}</view>
-        <view class="stats-label">平均价格</view>
+
+      <view class="text-menu-item" bindtap="importFromSMS">
+        <view class="text-menu-icon">💬</view>
+        <view class="text-menu-info">
+          <view class="text-menu-title">从短信导入信息</view>
+          <view class="text-menu-desc">从快递通知短信中提取信息（开发中）</view>
+        </view>
+        <view class="text-menu-arrow">></view>
       </view>
-      <view class="stats-item">
-        <view class="stats-number">{{stats.avgTime}}</view>
-        <view class="stats-label">平均时长</view>
+    </view>
+
+    <!-- 功能说明 -->
+    <view class="feature-section">
+      <view class="feature-title">功能说明</view>
+      <view class="feature-content">
+        <view class="feature-item">
+          <view class="feature-name">✏️ 手动填写</view>
+          <view class="feature-desc">适用于已知完整收件信息的情况，准确度最高</view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-name">📱 扫码获取</view>
+          <view class="feature-desc">通过扫描快递单上的二维码快速获取信息</view>
+        </view>
+        <view class="feature-item">
+          <view class="feature-name">💬 短信导入</view>
+          <view class="feature-desc">从快递公司发送的通知短信中智能提取信息</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 收件信息发布表单 -->
+  <view class="publish-form" wx:if="{{showPublishForm}}">
+    <view class="form-header">
+      <view class="form-title">发布收件信息</view>
+      <view class="form-close" bindtap="closePublishForm">×</view>
+    </view>
+    
+    <view class="form-content">
+      <view class="form-item">
+        <view class="form-label">收件人真名 <text class="required">*</text></view>
+        <input 
+          class="form-input" 
+          placeholder="收件人姓名" 
+          value="{{publishForm.receiverName}}" 
+          bindinput="onReceiverNameInput"
+          maxlength="20"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">收件人手机号 <text class="required">*</text></view>
+        <input 
+          class="form-input" 
+          placeholder="手机号" 
+          value="{{publishForm.receiverPhone}}" 
+          bindinput="onReceiverPhoneInput"
+          type="number"
+          maxlength="11"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">快递单号 <text class="required">*</text></view>
+        <input 
+          class="form-input" 
+          placeholder="快递单号" 
+          value="{{publishForm.trackingNumber}}" 
+          bindinput="onTrackingNumberInput"
+          maxlength="30"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">快递取件码 <text class="required">*</text></view>
+        <input 
+          class="form-input" 
+          placeholder="取件码" 
+          value="{{publishForm.pickupCode}}" 
+          bindinput="onPickupCodeInput"
+          maxlength="10"
+        />
+      </view>
+
+      <view class="form-actions">
+        <button class="cancel-btn" bindtap="closePublishForm">取消</button>
+        <button class="submit-btn" bindtap="submitPublishForm" disabled="{{!isFormValid}}">发布</button>
       </view>
     </view>
   </view>

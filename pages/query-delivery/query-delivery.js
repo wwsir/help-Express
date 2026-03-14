@@ -1,4 +1,4 @@
-// pages/query/query.js
+// pages/query-delivery/query-delivery.js
 Page({
   data: {
     companyList: [

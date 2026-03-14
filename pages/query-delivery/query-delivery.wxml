@@ -1,4 +1,4 @@
-<!-- pages/query/query.wxml -->
+<!-- pages/query-delivery/query-delivery.wxml -->
 <view class="container">
   <!-- 页面标题 -->
   <view class="page-header">

@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/receive-delivery/receive-delivery",
-    "pages/query/query",
+    "pages/query-delivery/query-delivery",
     "pages/profile/profile"
   ],
   "window": {
@@ -22,7 +22,7 @@
         "text": "取快递"
       },
       {
-        "pagePath": "pages/query/query",
+        "pagePath": "pages/query-delivery/query-delivery",
         "text": "查快递"
       },
       {
