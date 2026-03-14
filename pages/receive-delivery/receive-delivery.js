@@ -2,7 +2,7 @@
 Page({
   data: {
     // 页面状态控制
-    currentPage: 'main', // main: 主页面, publish: 收取快递页面
+    currentPage: 'main', // main: 主页面, publish: 收取快递页面, pickupList: 代取快递列表页面
     recentRequests: [
       {
         id: 1,
@@ -26,6 +26,78 @@ Page({
         price: 15
       }
     ],
+    // 代取快递列表数据
+    pickupPackages: [
+      {
+        id: 1,
+        receiverName: '张三',
+        phone: '138****8888',
+        trackingNumber: 'YTO1234567890',
+        pickupCode: '1234',
+        company: '圆通快递',
+        location: '万达广场快递点',
+        status: '待取件',
+        selected: false,
+        publishTime: '2024-03-14 10:30',
+        price: 8
+      },
+      {
+        id: 2,
+        receiverName: '李四',
+        phone: '139****9999',
+        trackingNumber: 'STO9876543210',
+        pickupCode: '5678',
+        company: '申通快递',
+        location: '大学城快递柜',
+        status: '待取件',
+        selected: false,
+        publishTime: '2024-03-14 11:15',
+        price: 10
+      },
+      {
+        id: 3,
+        receiverName: '王五',
+        phone: '136****6666',
+        trackingNumber: 'ZTO5432109876',
+        pickupCode: '9012',
+        company: '中通快递',
+        location: 'CBD商务区快递站',
+        status: '待取件',
+        selected: false,
+        publishTime: '2024-03-14 09:45',
+        price: 12
+      },
+      {
+        id: 4,
+        receiverName: '赵六',
+        phone: '137****7777',
+        trackingNumber: 'SF1357924680',
+        pickupCode: '3456',
+        company: '顺丰快递',
+        location: '万达广场快递点',
+        status: '已取件',
+        selected: false,
+        publishTime: '2024-03-14 08:20',
+        price: 15
+      },
+      {
+        id: 5,
+        receiverName: '孙七',
+        phone: '135****5555',
+        trackingNumber: 'YD2468013579',
+        pickupCode: '7890',
+        company: '韵达快递',
+        location: '村委会服务点',
+        status: '待取件',
+        selected: false,
+        publishTime: '2024-03-14 12:00',
+        price: 6
+      }
+    ],
+    selectedCount: 0,
+    showConfirmPickup: false,
+    waitingPackagesCount: 0,
+    allWaitingSelected: false,
     stats: {
       todayRequests: 28,
       activeHelpers: 156,
@@ -45,6 +117,7 @@ Page({
 
   onLoad() {
     this.loadData()
+    this.updatePickupStats()
   },
 
   onShow() {
@@ -177,15 +250,171 @@ Page({
 
   // 查看代取快递列表
   goToHelpExpress() {
-    wx.showActionSheet({
-      itemList: ['查看全部需求', '我的接单记录', '收益统计'],
-      success: (res) => {
-        const actions = ['查看代取需求列表', '查看我的接单记录', '查看收益统计']
-        wx.showToast({
-          title: `${actions[res.tapIndex]}功能开发中`,
-          icon: 'none'
-        })
+    this.setData({
+      currentPage: 'pickupList',
+      selectedCount: 0
+    })
+    // 重置所有选择状态
+    this.resetSelection()
+    this.updatePickupStats()
+  },
+
+  // 更新代取统计信息
+  updatePickupStats() {
+    const waitingPackages = this.data.pickupPackages.filter(item => item.status === '待取件')
+    const waitingPackagesCount = waitingPackages.length
+    const allWaitingSelected = waitingPackages.length > 0 && waitingPackages.every(item => item.selected)
+    
+    this.setData({
+      waitingPackagesCount,
+      allWaitingSelected
+    })
+  },
+
+  // 返回到代取快递列表页面
+  backToPickupList() {
+    this.setData({
+      currentPage: 'pickupList'
+    })
+  },
+
+  // 重置选择状态
+  resetSelection() {
+    const pickupPackages = this.data.pickupPackages.map(item => ({
+      ...item,
+      selected: false
+    }))
+    this.setData({
+      pickupPackages,
+      selectedCount: 0
+    })
+  },
+
+  // 切换快递选择状态
+  togglePackageSelection(e) {
+    const id = e.currentTarget.dataset.id
+    const pickupPackages = this.data.pickupPackages.map(item => {
+      if (item.id === id && item.status === '待取件') {
+        return { ...item, selected: !item.selected }
       }
+      return item
+    })
+    
+    const selectedCount = pickupPackages.filter(item => item.selected).length
+    this.setData({
+      pickupPackages,
+      selectedCount
+    })
+    this.updatePickupStats()
+  },
+
+  // 全选/取消全选待取件快递
+  toggleSelectAll() {
+    const waitingPackages = this.data.pickupPackages.filter(item => item.status === '待取件')
+    const allWaitingSelected = waitingPackages.every(item => item.selected)
+    
+    const pickupPackages = this.data.pickupPackages.map(item => {
+      if (item.status === '待取件') {
+        return { ...item, selected: !allWaitingSelected }
+      }
+      return item
+    })
+    
+    const selectedCount = allWaitingSelected ? 0 : waitingPackages.length
+    this.setData({
+      pickupPackages,
+      selectedCount
+    })
+    this.updatePickupStats()
+  },
+
+  // 确认取件
+  confirmPickup() {
+    if (this.data.selectedCount === 0) {
+      wx.showToast({
+        title: '请选择要取的快递',
+        icon: 'none'
+      })
+      return
+    }
+
+    const selectedPackages = this.data.pickupPackages.filter(item => item.selected)
+    const totalPrice = selectedPackages.reduce((sum, item) => sum + item.price, 0)
+    
+    wx.showModal({
+      title: '确认取件',
+      content: `确定要取这${selectedPackages.length}件快递吗？\n\n总收益：¥${totalPrice}\n\n确认后快递状态将变为"已取件"`,
+      success: (res) => {
+        if (res.confirm) {
+          this.handleConfirmPickup(selectedPackages)
+        }
+      }
+    })
+  },
+
+  // 处理确认取件
+  handleConfirmPickup(selectedPackages) {
+    wx.showLoading({
+      title: '处理中...'
+    })
+
+    setTimeout(() => {
+      // 更新选中快递的状态为"已取件"
+      const pickupPackages = this.data.pickupPackages.map(item => {
+        const selectedItem = selectedPackages.find(selected => selected.id === item.id)
+        if (selectedItem) {
+          return { 
+            ...item, 
+            status: '已取件', 
+            selected: false,
+            pickupTime: new Date().toLocaleString('zh-CN', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit'
+            }).replace(/\//g, '-')
+          }
+        }
+        return item
+      })
+
+      const totalPrice = selectedPackages.reduce((sum, item) => sum + item.price, 0)
+      
+      this.setData({
+        pickupPackages,
+        selectedCount: 0
+      })
+
+      wx.hideLoading()
+      
+      wx.showToast({
+        title: '取件成功',
+        icon: 'success'
+      })
+
+      // 显示取件成功详情
+      setTimeout(() => {
+        const packageList = selectedPackages.map(item => 
+          `• ${item.company} - ${item.receiverName} (¥${item.price})`
+        ).join('\n')
+        
+        wx.showModal({
+          title: '取件成功',
+          content: `已成功取件 ${selectedPackages.length} 件：\n\n${packageList}\n\n总收益：¥${totalPrice}\n收益将在24小时内到账`,
+          showCancel: false
+        })
+      }, 1500)
+    }, 1500)
+  },
+
+  // 筛选快递状态
+  filterPackages(e) {
+    const status = e.currentTarget.dataset.status
+    // 这里可以添加筛选逻辑，暂时用toast提示
+    wx.showToast({
+      title: `筛选${status}快递`,
+      icon: 'none'
     })
   },
 

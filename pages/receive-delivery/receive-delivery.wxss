@@ -416,3 +416,211 @@
   font-size: 24rpx;
   color: #666;
 }
+
+/* 代取快递列表页面样式 */
+.filter-bar {
+  background-color: white;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.filter-btn {
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  background-color: #f5f5f5;
+  transition: all 0.2s;
+}
+
+.filter-btn.active {
+  background-color: #1296db;
+  color: white;
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+.selection-info {
+  font-size: 24rpx;
+  color: #1296db;
+  font-weight: 500;
+}
+
+.action-bar {
+  background-color: white;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-all-btn {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.select-icon {
+  font-size: 32rpx;
+}
+
+.confirm-btn {
+  background-color: #ccc;
+  color: white;
+  padding: 15rpx 30rpx;
+  border-radius: 25rpx;
+  font-size: 28rpx;
+  transition: all 0.2s;
+}
+
+.confirm-btn.active {
+  background-color: #1296db;
+}
+
+.confirm-btn:active {
+  transform: scale(0.95);
+}
+
+.package-list {
+  padding: 20rpx;
+}
+
+.package-item {
+  background-color: white;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.package-content {
+  display: flex;
+  padding: 25rpx;
+}
+
+.select-box {
+  margin-right: 20rpx;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 10rpx;
+}
+
+.package-info {
+  flex: 1;
+}
+
+.package-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.company-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.status-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.status-tag.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-tag.completed {
+  background-color: #d1edff;
+  color: #0c5aa6;
+}
+
+.package-details {
+  margin-bottom: 20rpx;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+  flex-wrap: wrap;
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-size: 26rpx;
+  color: #666;
+  width: 120rpx;
+  flex-shrink: 0;
+}
+
+.value {
+  font-size: 26rpx;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+
+.pickup-code {
+  font-weight: bold;
+  color: #e74c3c;
+  background-color: #ffeaa7;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-family: 'Courier New', monospace;
+}
+
+.phone {
+  font-size: 24rpx;
+  color: #1296db;
+  text-decoration: underline;
+}
+
+.package-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 400px) {
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .label {
+    width: auto;
+    margin-bottom: 4rpx;
+  }
+  
+  .value {
+    margin-right: 0;
+  }
+}

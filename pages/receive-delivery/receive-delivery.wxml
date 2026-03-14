@@ -124,6 +124,101 @@
     </view>
   </view>
 
+  <!-- 代取快递列表页面 -->
+  <view wx:if="{{currentPage === 'pickupList'}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="header-back" bindtap="backToMain">‹ 返回</view>
+      <view class="header-title">代取快递</view>
+      <view class="header-desc">选择要代取的快递包裹</view>
+    </view>
+
+    <!-- 筛选和统计栏 -->
+    <view class="filter-bar">
+      <view class="filter-buttons">
+        <view class="filter-btn active" bindtap="filterPackages" data-status="全部">全部</view>
+        <view class="filter-btn" bindtap="filterPackages" data-status="待取件">待取件</view>
+        <view class="filter-btn" bindtap="filterPackages" data-status="已取件">已取件</view>
+      </view>
+      <view class="selection-info" wx:if="{{selectedCount > 0}}">
+        已选 {{selectedCount}} 件
+      </view>
+    </view>
+
+    <!-- 操作栏 -->
+    <view class="action-bar" wx:if="{{waitingPackagesCount > 0}}">
+      <view class="select-all-btn" bindtap="toggleSelectAll">
+        <view class="select-icon">{{allWaitingSelected ? '☑️' : '☐'}}</view>
+        <text>全选待取件</text>
+      </view>
+      <view class="confirm-btn {{selectedCount > 0 ? 'active' : ''}}" bindtap="confirmPickup">
+        确认取件 {{selectedCount > 0 ? '(' + selectedCount + ')' : ''}}
+      </view>
+    </view>
+
+    <!-- 快递列表 -->
+    <view class="package-list">
+      <view class="package-item" wx:for="{{pickupPackages}}" wx:key="id">
+        <view class="package-content" bindtap="togglePackageSelection" data-id="{{item.id}}">
+          <!-- 选择框 -->
+          <view class="select-box" wx:if="{{item.status === '待取件'}}">
+            <view class="select-icon">{{item.selected ? '☑️' : '☐'}}</view>
+          </view>
+          
+          <!-- 快递信息 -->
+          <view class="package-info">
+            <view class="package-header">
+              <view class="company-name">{{item.company}}</view>
+              <view class="status-tag {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
+            </view>
+            
+            <view class="package-details">
+              <view class="detail-row">
+                <text class="label">收件人:</text>
+                <text class="value">{{item.receiverName}}</text>
+                <text class="phone">{{item.phone}}</text>
+              </view>
+              
+              <view class="detail-row">
+                <text class="label">单号:</text>
+                <text class="value">{{item.trackingNumber}}</text>
+              </view>
+              
+              <view class="detail-row">
+                <text class="label">取件码:</text>
+                <text class="value pickup-code">{{item.pickupCode}}</text>
+              </view>
+              
+              <view class="detail-row">
+                <text class="label">地点:</text>
+                <text class="value">{{item.location}}</text>
+              </view>
+              
+              <view class="detail-row">
+                <text class="label">发布时间:</text>
+                <text class="value">{{item.publishTime}}</text>
+              </view>
+              
+              <view class="detail-row" wx:if="{{item.pickupTime}}">
+                <text class="label">取件时间:</text>
+                <text class="value">{{item.pickupTime}}</text>
+              </view>
+            </view>
+            
+            <view class="package-footer">
+              <view class="price">¥{{item.price}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{pickupPackages.length === 0}}">
+      <view class="empty-icon">📦</view>
+      <view class="empty-text">暂无快递信息</view>
+    </view>
+  </view>
 
   <!-- 收件信息发布表单 -->
   <view class="publish-form" wx:if="{{showPublishForm}}">
