@@ -173,19 +173,15 @@
             </view>
             
             <view class="package-details">
-              <view class="detail-row">
+              <view class="detail-line">
                 <text class="label">收件人:</text>
                 <text class="value">{{item.receiverName}}</text>
               </view>
               
-              <view class="detail-row">
+              <view class="detail-line">
                 <text class="label">快递单号:</text>
                 <text class="value">{{item.trackingNumber}}</text>
               </view>
-            </view>
-            
-            <view class="package-footer">
-              <view class="price">¥{{item.price}}</view>
             </view>
           </view>
         </view>

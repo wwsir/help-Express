@@ -594,6 +594,16 @@
   margin-bottom: 0;
 }
 
+.detail-line {
+  display: block;
+  width: 100%;
+  margin-bottom: 12rpx;
+}
+
+.detail-line:last-child {
+  margin-bottom: 0;
+}
+
 .label {
   font-size: 26rpx;
   color: #666;
