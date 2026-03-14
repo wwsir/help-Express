@@ -5,7 +5,7 @@
     <!-- 页面标题 -->
     <view class="page-header">
       <view class="header-title">快递服务</view>
-      <view class="header-desc">选择您需要的快递服务</view>
+      <view class="header-desc">小程序说明：快递收件人支付一定的费用给代取员，代取员帮忙把快递从镇送到村。</view>
     </view>
 
     <!-- 服务选项 -->
