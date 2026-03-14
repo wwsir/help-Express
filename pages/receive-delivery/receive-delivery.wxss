@@ -291,6 +291,16 @@
   padding: 40rpx;
 }
 
+.form-content {
+  background-color: white;
+  border-radius: 12rpx;
+  max-height: 80vh;
+  max-width: 600rpx;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
 .form-header {
   display: flex;
   justify-content: space-between;
@@ -309,13 +319,11 @@
   font-size: 40rpx;
   color: #999;
   line-height: 1;
+  cursor: pointer;
 }
 
-.form-content {
-  background-color: white;
-  border-radius: 12rpx;
-  max-height: 80vh;
-  overflow-y: auto;
+.form-close:active {
+  color: #666;
 }
 
 .form-item {
@@ -341,22 +349,28 @@
 
 .form-input {
   width: 100%;
-  padding: 20rpx;
+  padding: 5rpx 20rpx 5rpx 20rpx;
   border: 2rpx solid #e0e0e0;
   border-radius: 8rpx;
   font-size: 28rpx;
   background-color: #fff;
   box-sizing: border-box;
+  height: 80rpx;
+  vertical-align: bottom;
+  text-align: left;
+  line-height: 70rpx;
 }
 
 .form-input:focus {
   border-color: #1296db;
 }
 
-/* 缩小placeholder字体 */
+/* placeholder文本底对齐 */
 .form-input::placeholder {
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #999;
+  line-height: 70rpx;
+  vertical-align: bottom;
 }
 
 .form-actions {

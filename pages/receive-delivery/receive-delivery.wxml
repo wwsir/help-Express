@@ -222,12 +222,12 @@
 
   <!-- 收件信息发布表单 -->
   <view class="publish-form" wx:if="{{showPublishForm}}">
-    <view class="form-header">
-      <view class="form-title">发布收件信息</view>
-      <view class="form-close" bindtap="closePublishForm">×</view>
-    </view>
-    
     <view class="form-content">
+      <view class="form-header">
+        <view class="form-title">发布收件信息</view>
+        <view class="form-close" bindtap="closePublishForm">×</view>
+      </view>
+      
       <view class="form-item">
         <view class="form-label">收件人真名 <text class="required">*</text></view>
         <input 
