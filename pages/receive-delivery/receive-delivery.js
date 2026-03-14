@@ -75,7 +75,7 @@ Page({
         pickupCode: '3456',
         company: '顺丰快递',
         location: '万达广场快递点',
-        status: '已取件',
+        status: '待取件',
         selected: false,
         publishTime: '2024-03-14 08:20',
         price: 15

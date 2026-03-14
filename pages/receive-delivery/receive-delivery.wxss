@@ -556,10 +556,10 @@
   margin-bottom: 20rpx;
 }
 
-.company-name {
-  font-size: 32rpx;
+.package-number {
+  font-size: 28rpx;
   font-weight: bold;
-  color: #333;
+  color: #1296db;
 }
 
 .status-tag {

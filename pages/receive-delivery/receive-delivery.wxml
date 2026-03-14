@@ -168,7 +168,7 @@
           <!-- 快递信息 -->
           <view class="package-info">
             <view class="package-header">
-              <view class="company-name">{{item.company}}</view>
+              <view class="package-number">编号: {{index + 1}}</view>
               <view class="status-tag {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
             </view>
             
@@ -176,32 +176,11 @@
               <view class="detail-row">
                 <text class="label">收件人:</text>
                 <text class="value">{{item.receiverName}}</text>
-                <text class="phone">{{item.phone}}</text>
               </view>
               
               <view class="detail-row">
-                <text class="label">单号:</text>
+                <text class="label">快递单号:</text>
                 <text class="value">{{item.trackingNumber}}</text>
-              </view>
-              
-              <view class="detail-row">
-                <text class="label">取件码:</text>
-                <text class="value pickup-code">{{item.pickupCode}}</text>
-              </view>
-              
-              <view class="detail-row">
-                <text class="label">地点:</text>
-                <text class="value">{{item.location}}</text>
-              </view>
-              
-              <view class="detail-row">
-                <text class="label">发布时间:</text>
-                <text class="value">{{item.publishTime}}</text>
-              </view>
-              
-              <view class="detail-row" wx:if="{{item.pickupTime}}">
-                <text class="label">取件时间:</text>
-                <text class="value">{{item.pickupTime}}</text>
               </view>
             </view>
             
