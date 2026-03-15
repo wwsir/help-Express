@@ -132,6 +132,32 @@
   font-weight: bold;
 }
 
+.detail-item.status-pending {
+  color: #856404;
+  background-color: #fff3cd;
+  padding: 2rpx 8rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  display: inline-block;
+  margin-left: 6rpx;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.detail-item.status-completed {
+  color: #0c5aa6;
+  background-color: #d1edff;
+  padding: 2rpx 8rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  display: inline-block;
+  margin-left: 6rpx;
+  width: fit-content;
+  white-space: nowrap;
+}
+
 .request-action {
   flex-shrink: 0;
 }
@@ -140,10 +166,12 @@
   background-color: #1296db;
   color: white;
   border: none;
-  border-radius: 20rpx;
-  padding: 12rpx 24rpx;
-  font-size: 24rpx;
-  min-width: 80rpx;
+  border-radius: 16rpx;
+  padding: 8rpx 16rpx;
+  font-size: 22rpx;
+  min-width: fit-content;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .action-btn:active {

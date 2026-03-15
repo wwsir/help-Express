@@ -37,11 +37,9 @@
       <view class="request-list">
         <view class="request-item" wx:for="{{recentRequests}}" wx:key="id">
           <view class="request-info" bindtap="showRequestDetails" data-id="{{item.id}}">
-            <view class="request-title">{{item.title}}</view>
             <view class="request-detail">
-              <text class="detail-item">📍 {{item.location}}</text>
-              <text class="detail-item">⏰ {{item.time}}</text>
-              <text class="detail-item price">💰 ¥{{item.price}}</text>
+              <text class="detail-item">📦 {{item.trackingNumber || '快递单号：' + item.id}}</text>
+              <text class="detail-item status-{{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status || '待取件'}}</text>
             </view>
           </view>
           <view class="request-action">
@@ -117,6 +115,50 @@
         <view class="help-item">• 发布后会有热心用户帮您代取快递</view>
         <view class="help-item">• 请确保信息准确，以便顺利完成代取</view>
       </view>
+    </view>
+  </view>
+
+  <!-- 所有代取需求页面 -->
+  <view wx:if="{{currentPage === 'allRequests'}}">
+    <!-- 页面标题 -->
+    <view class="page-header">
+      <view class="header-back" bindtap="backToMain">‹</view>
+      <view class="header-title">所有代取需求</view>
+      <view class="header-desc">查看所有可接单的快递</view>
+    </view>
+
+    <!-- 快递列表 -->
+    <view class="package-list">
+      <view class="package-item" wx:for="{{availableRequests}}" wx:key="id">
+        <view class="package-content">
+          <!-- 快递信息 -->
+          <view class="package-info">
+            <view class="package-header">
+              <view class="package-number">{{item.trackingNumber}}</view>
+              <view class="status-tag pending">{{item.status}}</view>
+            </view>
+          </view>
+
+          <!-- 接单按钮 -->
+          <view class="request-action">
+            <button class="action-btn" bindtap="takeOrderFromAllRequests" data-id="{{item.id}}">接单</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{availableRequests.length === 0}}">
+      <view class="empty-icon">📦</view>
+      <view class="empty-text">暂无可接单的快递</view>
+    </view>
+
+    <!-- 返回按钮 -->
+    <view class="bottom-actions">
+      <button class="home-btn" bindtap="backToMain">
+        <view class="home-icon">🏠</view>
+        <text>返回首页</text>
+      </button>
     </view>
   </view>
 

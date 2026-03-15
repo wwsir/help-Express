@@ -2,7 +2,9 @@
 Page({
   data: {
     // 页面状态控制
-    currentPage: 'main', // main: 主页面, publish: 收取快递页面, pickupList: 代取快递列表页面
+    currentPage: 'main', // main: 主页面, publish: 收取快递页面, pickupList: 代取快递列表页面, allRequests: 所有代取需求页面
+    // 所有代取需求页面的待取件快递列表
+    availableRequests: [],
     recentRequests: [
       {
         id: 1,
@@ -130,6 +132,7 @@ Page({
   onLoad() {
     this.loadData()
     this.updatePickupStats()
+    this.updateRecentFromPickupPackages()
   },
 
   onShow() {
@@ -447,13 +450,76 @@ Page({
     })
   },
 
-  // 查看所有需求
+  // 查看所有需求 - 跳转到所有代取需求页面
   viewAllRequests() {
-    wx.showModal({
-      title: '全部代取需求',
-      content: '这里将显示所有待接取的快递需求：\n\n• 申通快递 - 电子产品 (¥12)\n• 圆通快递 - 衣物包裹 (¥8)\n• 中通快递 - 文件资料 (¥15)\n• 韵达快递 - 生活用品 (¥10)\n• 顺丰快递 - 重要文件 (¥20)\n\n更多需求正在加载中...',
-      showCancel: false
+    // 更新可用请求列表
+    this.updateAvailableRequests()
+    this.setData({
+      currentPage: 'allRequests'
     })
+  },
+
+  // 更新可用请求列表
+  updateAvailableRequests() {
+    const availableRequests = this.data.pickupPackages.filter(item => item.status === '待取件')
+    this.setData({
+      availableRequests
+    })
+  },
+
+  // 从所有代取需求页面接单
+  takeOrderFromAllRequests(e) {
+    const id = e.currentTarget.dataset.id
+    const packageItem = this.data.pickupPackages.find(item => item.id === id)
+    
+    wx.showModal({
+      title: '确认接单',
+      content: `确定要接取快递单号"${packageItem.trackingNumber}"吗？\n\n快递公司：${packageItem.company}\n取件地址：${packageItem.location}\n服务费用：¥${packageItem.price}`,
+      success: (res) => {
+        if (res.confirm) {
+          this.handleTakeOrderFromAllRequests(id)
+        }
+      }
+    })
+  },
+
+  // 处理从所有代取需求页面接单
+  handleTakeOrderFromAllRequests(id) {
+    wx.showLoading({
+      title: '接单中...'
+    })
+
+    setTimeout(() => {
+      // 更新快递状态为已接单（可以用新状态）
+      const pickupPackages = this.data.pickupPackages.map(item => {
+        if (item.id === id) {
+          return { ...item, status: '已接单' }
+        }
+        return item
+      })
+      
+      this.setData({ pickupPackages })
+      // 更新最新代取数据和可用请求列表
+      this.updateRecentFromPickupPackages()
+      this.updateAvailableRequests()
+      
+      wx.hideLoading()
+      
+      wx.showToast({
+        title: '接单成功',
+        icon: 'success'
+      })
+
+      // 显示联系信息
+      setTimeout(() => {
+        const packageItem = this.data.pickupPackages.find(item => item.id === id)
+        wx.showModal({
+          title: '接单成功',
+          content: `请联系发布者确认取件详情\n\n收件人：${packageItem.receiverName}\n联系电话：${packageItem.phone}\n快递单号：${packageItem.trackingNumber}\n取件码：${packageItem.pickupCode}\n\n请按时完成取件任务`,
+          showCancel: false
+        })
+      }, 1500)
+    }, 1000)
   },
 
   // 接单操作
@@ -600,6 +666,27 @@ Page({
     wx.showToast({
       title: '已选择此快递',
       icon: 'success'
+    })
+  },
+
+  // 从代取快递列表更新最新代取数据
+  updateRecentFromPickupPackages() {
+    // 从代取快递列表中获取最新的3-4条数据作为最新代取
+    const recentRequests = this.data.pickupPackages
+      .filter(item => item.status === '待取件') // 只显示待取件状态
+      .slice(0, 3) // 取前3条
+      .map(item => ({
+        id: item.id,
+        trackingNumber: item.trackingNumber,
+        status: item.status,
+        receiverName: item.receiverName,
+        company: item.company,
+        location: item.location,
+        price: item.price
+      }))
+    
+    this.setData({
+      recentRequests
     })
   }
 })
