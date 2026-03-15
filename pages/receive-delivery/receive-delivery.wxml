@@ -180,6 +180,11 @@
               </view>
             </view>
           </view>
+
+          <!-- 详情箭头 -->
+          <view class="package-arrow" bindtap="showPackageDetails" data-id="{{item.id}}">
+            <view class="arrow-icon">></view>
+          </view>
         </view>
       </view>
     </view>
