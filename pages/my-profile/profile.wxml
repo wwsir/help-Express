@@ -1,5 +1,11 @@
 <!-- pages/my-profile/profile.wxml -->
 <view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-title">我的</view>
+    <view class="header-desc">个人中心，管理您的快递服务信息</view>
+  </view>
+
   <!-- 用户信息卡片 -->
   <view class="user-card" wx:if="{{isLoggedIn}}">
     <view class="user-avatar">
@@ -11,23 +17,18 @@
     </view>
   </view>
 
-  <!-- 未登录状态 -->
-  <view class="login-prompt" wx:if="{{!isLoggedIn}}">
+  <!-- 未登录状态 - 可点击登录 -->
+  <view class="login-prompt" wx:if="{{!isLoggedIn}}" bindtap="goToLogin">
     <view class="prompt-icon">👤</view>
     <view class="prompt-text">请先登录享受更多服务</view>
+    <view class="login-hint">点击此处登录</view>
   </view>
 
   <!-- 功能菜单 -->
   <view class="menu-section">
     <!-- 登录选项 -->
-    <view class="menu-group">
-      <view class="menu-item" bindtap="goToLogin" wx:if="{{!isLoggedIn}}">
-        <view class="menu-icon">👤</view>
-        <view class="menu-text">登录</view>
-        <view class="menu-badge">享受更多服务</view>
-      </view>
-      
-      <view class="menu-item logout" bindtap="handleLogout" wx:if="{{isLoggedIn}}">
+    <view class="menu-group" wx:if="{{isLoggedIn}}">
+      <view class="menu-item logout" bindtap="handleLogout">
         <view class="menu-icon">🚪</view>
         <view class="menu-text">退出登录</view>
       </view>
