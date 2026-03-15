@@ -440,6 +440,84 @@ Page({
     }, 1500)
   },
 
+  // 确认自取
+  confirmSelfPickup() {
+    if (this.data.selectedCount === 0) {
+      wx.showToast({
+        title: '请选择要确认自取的快递',
+        icon: 'none'
+      })
+      return
+    }
+
+    const selectedPackages = this.data.pickupPackages.filter(item => item.selected)
+    
+    wx.showModal({
+      title: '确认自取',
+      content: `确认收件人已自己取到这${selectedPackages.length}件快递？\n\n此操作将标记为收件人自取完成，不产生代取费用。`,
+      success: (res) => {
+        if (res.confirm) {
+          this.handleConfirmSelfPickup(selectedPackages)
+        }
+      }
+    })
+  },
+
+  // 处理确认自取
+  handleConfirmSelfPickup(selectedPackages) {
+    wx.showLoading({
+      title: '处理中...'
+    })
+
+    setTimeout(() => {
+      // 更新选中快递的状态为"已自取"
+      const pickupPackages = this.data.pickupPackages.map(item => {
+        const selectedItem = selectedPackages.find(selected => selected.id === item.id)
+        if (selectedItem) {
+          return { 
+            ...item, 
+            status: '已自取', 
+            selected: false,
+            pickupTime: new Date().toLocaleString('zh-CN', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit'
+            }).replace(/\//g, '-'),
+            pickupType: 'self' // 标记为自取
+          }
+        }
+        return item
+      })
+      
+      this.setData({
+        pickupPackages,
+        selectedCount: 0
+      })
+
+      wx.hideLoading()
+      
+      wx.showToast({
+        title: '确认自取成功',
+        icon: 'success'
+      })
+
+      // 显示确认自取成功详情
+      setTimeout(() => {
+        const packageList = selectedPackages.map(item => 
+          `• ${item.company} - ${item.receiverName}`
+        ).join('\n')
+        
+        wx.showModal({
+          title: '确认自取成功',
+          content: `已确认收件人自取 ${selectedPackages.length} 件：\n\n${packageList}\n\n快递状态已更新为"已自取"`,
+          showCancel: false
+        })
+      }, 1500)
+    }, 1500)
+  },
+
   // 筛选快递状态
   filterPackages(e) {
     const status = e.currentTarget.dataset.status
@@ -688,5 +766,85 @@ Page({
     this.setData({
       recentRequests
     })
+  },
+
+  // 从详情页确认取件
+  confirmPickupFromDetail(e) {
+    const packageId = e.currentTarget.dataset.id;
+    
+    wx.showModal({
+      title: '确认取件',
+      content: '确认已完成此快递的代取服务吗？',
+      confirmText: '确认',
+      cancelText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          // 更新快递状态
+          const updatedPackages = this.data.pickupPackages.map(pkg => {
+            if (pkg.id === packageId) {
+              return {
+                ...pkg,
+                status: '已取件',
+                pickupTime: new Date().toLocaleString()
+              };
+            }
+            return pkg;
+          });
+
+          this.setData({
+            pickupPackages: updatedPackages,
+            showDetailModal: false
+          });
+
+          // 重新计算统计信息
+          this.updatePickupStats();
+
+          wx.showToast({
+            title: '确认取件成功',
+            icon: 'success'
+          });
+        }
+      }
+    });
+  },
+
+  // 从详情页确认自取
+  confirmSelfPickupFromDetail(e) {
+    const packageId = e.currentTarget.dataset.id;
+    
+    wx.showModal({
+      title: '确认自取',
+      content: '确认此快递已由收件人自取吗？',
+      confirmText: '确认',
+      cancelText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          // 更新快递状态
+          const updatedPackages = this.data.pickupPackages.map(pkg => {
+            if (pkg.id === packageId) {
+              return {
+                ...pkg,
+                status: '已自取',
+                pickupTime: new Date().toLocaleString()
+              };
+            }
+            return pkg;
+          });
+
+          this.setData({
+            pickupPackages: updatedPackages,
+            showDetailModal: false
+          });
+
+          // 重新计算统计信息
+          this.updatePickupStats();
+
+          wx.showToast({
+            title: '确认自取成功',
+            icon: 'success'
+          });
+        }
+      }
+    });
   }
 })

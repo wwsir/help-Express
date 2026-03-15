@@ -180,8 +180,13 @@
         <view class="select-icon">{{allWaitingSelected ? '☑️' : '☐'}}</view>
         <text>全选待取件</text>
       </view>
-      <view class="confirm-btn {{selectedCount > 0 ? 'active' : ''}}" bindtap="confirmPickup">
-        确认取件 {{selectedCount > 0 ? '(' + selectedCount + ')' : ''}}
+      <view class="action-buttons">
+        <view class="confirm-btn {{selectedCount > 0 ? 'active' : ''}}" bindtap="confirmPickup">
+          确认取件 {{selectedCount > 0 ? '(' + selectedCount + ')' : ''}}
+        </view>
+        <view class="self-pickup-btn {{selectedCount > 0 ? 'active' : ''}}" bindtap="confirmSelfPickup">
+          确认自取 {{selectedCount > 0 ? '(' + selectedCount + ')' : ''}}
+        </view>
       </view>
     </view>
 
@@ -198,12 +203,12 @@
           <view class="package-info" bindtap="showPackageDetails" data-id="{{item.id}}">
             <view class="package-header">
               <view class="package-number">编号: {{index + 1}}</view>
-              <view class="status-tag pickup-page-status {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
             </view>
             
             <view class="detail-line">
                 <text class="label">快递单号:</text>
                 <text class="value">{{item.trackingNumber}}</text>
+                <view class="status-tag pickup-page-status {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
               </view>
             <view class="package-details">
               <view class="detail-line">
@@ -447,7 +452,12 @@
             </view>
           </view>
 
-          <view class="detail-actions">
+          <view class="detail-actions" wx:if="{{selectedDetail.status === '待取件'}}">
+            <button class="detail-btn secondary" bindtap="closeDetailModal">关闭</button>
+            <button class="detail-btn primary" bindtap="confirmPickupFromDetail" data-id="{{selectedDetail.id}}">确认取件</button>
+            <button class="detail-btn green" bindtap="confirmSelfPickupFromDetail" data-id="{{selectedDetail.id}}">确认自取</button>
+          </view>
+          <view class="detail-actions" wx:else>
             <button class="detail-btn secondary" bindtap="closeDetailModal">关闭</button>
           </view>
         </view>

@@ -560,16 +560,24 @@
 }
 
 .select-icon {
-  font-size: 32rpx;
+  font-size: 36rpx;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15rpx;
+  align-items: center;
 }
 
 .confirm-btn {
   background-color: #ccc;
   color: white;
-  padding: 15rpx 30rpx;
+  padding: 15rpx 25rpx;
   border-radius: 25rpx;
-  font-size: 28rpx;
+  font-size: 26rpx;
   transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .confirm-btn.active {
@@ -577,6 +585,25 @@
 }
 
 .confirm-btn:active {
+  transform: scale(0.95);
+}
+
+.self-pickup-btn {
+  background-color: #ccc;
+  color: white;
+  padding: 15rpx 25rpx;
+  border-radius: 25rpx;
+  font-size: 26rpx;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.self-pickup-btn.active {
+  background-color: #28a745;
+}
+
+.self-pickup-btn:active {
   transform: scale(0.95);
 }
 
@@ -639,7 +666,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12rpx;
+  margin-bottom: 8rpx;
 }
 
 .package-number {
@@ -713,7 +740,8 @@
 }
 
 .detail-line {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   margin-bottom: 8rpx;
 }
@@ -1155,6 +1183,17 @@
 .detail-btn.primary:active {
   transform: scale(0.98);
   box-shadow: 0 2rpx 8rpx rgba(18, 150, 219, 0.4);
+}
+
+.detail-btn.green {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: white;
+  box-shadow: 0 4rpx 12rpx rgba(40, 167, 69, 0.3);
+}
+
+.detail-btn.green:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(40, 167, 69, 0.4);
 }
 
 .detail-btn::after {
