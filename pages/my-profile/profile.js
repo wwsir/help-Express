@@ -101,6 +101,15 @@ Page({
     })
   },
 
+  // 维护代取员
+  goToMaintainCouriers() {
+    wx.showModal({
+      title: '维护代取员',
+      content: '代取员管理功能：\n\n• 查看代取员列表\n• 添加新代取员\n• 编辑代取员信息\n• 设置代取员状态\n• 查看代取员评价\n• 管理服务区域\n\n功能正在开发中...',
+      showCancel: false
+    })
+  },
+
   // 我的收取快递
   goToMyReceiveOrders() {
     wx.showModal({

@@ -5,6 +5,8 @@
   padding: 40rpx 30rpx;
   text-align: center;
   margin-bottom: 20rpx;
+  position: relative;
+  min-height: 120rpx;
 }
 
 .header-title {

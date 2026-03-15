@@ -46,11 +46,17 @@
         <view class="menu-badge" wx:if="{{stats.myHelpOrders > 0}}">{{stats.myHelpOrders}}</view>
       </view>
       
+      <view class="menu-item" bindtap="goToMaintainCouriers">
+        <view class="menu-icon">👥</view>
+        <view class="menu-text">维护代取员</view>
+      </view>
+
       <view class="menu-item" bindtap="goToSettings">
         <view class="menu-icon">⚙️</view>
         <view class="menu-text">我的设置</view>
       </view>
       
+     
       <view class="menu-item" bindtap="goToHelp">
         <view class="menu-icon">❓</view>
         <view class="menu-text">帮助中心</view>
