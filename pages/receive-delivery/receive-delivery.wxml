@@ -201,16 +201,16 @@
               <view class="status-tag {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
             </view>
             
+            <view class="detail-line">
+                <text class="label">快递单号:</text>
+                <text class="value">{{item.trackingNumber}}</text>
+              </view>
             <view class="package-details">
               <view class="detail-line">
                 <text class="label">收件人:</text>
                 <text class="value">{{item.receiverName}}</text>
               </view>
               
-              <view class="detail-line">
-                <text class="label">快递单号:</text>
-                <text class="value">{{item.trackingNumber}}</text>
-              </view>
             </view>
           </view>
 
