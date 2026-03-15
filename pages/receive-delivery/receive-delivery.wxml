@@ -16,7 +16,6 @@
           <view class="option-title">收取快递</view>
           <view class="option-desc">登记取件信息,让有交通工具的乡亲帮您取快递,每件2元代取费</view>
         </view>
-        <view class="option-arrow">></view>
       </view>
 
       <view class="option-card" bindtap="goToHelpExpress">
@@ -25,7 +24,6 @@
           <view class="option-title">代取快递</view>
           <view class="option-desc">如果您有交通工具又有责任心,欢迎帮助乡亲们代取快递</view>
         </view>
-        <view class="option-arrow">></view>
       </view>
     </view>
 
@@ -99,16 +97,14 @@
           <view class="menu-title">文字发布收件信息</view>
           <view class="menu-desc">手动输入收件人信息、快递单号等</view>
         </view>
-        <view class="menu-arrow">></view>
       </view>
 
       <view class="menu-item" bindtap="selectImagePublish">
         <view class="menu-icon">📷</view>
         <view class="menu-info">
-          <view class="menu-title">图片发布取件信息</view>
+          <view class="menu-title">图片发布收件信息</view>
           <view class="menu-desc">拍照上传取件码截图（开发中）</view>
         </view>
-        <view class="menu-arrow">></view>
       </view>
     </view>
 

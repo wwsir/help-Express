@@ -645,6 +645,26 @@
   color: #e74c3c;
 }
 
+/* 快递详情箭头样式 */
+.package-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 15rpx;
+  margin-left: 10rpx;
+}
+
+.arrow-icon {
+  font-size: 32rpx;
+  color: #ccc;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.package-arrow:active .arrow-icon {
+  color: #1296db;
+}
+
 /* 返回主页按钮样式 */
 .bottom-actions {
   padding: 30rpx 40rpx;
