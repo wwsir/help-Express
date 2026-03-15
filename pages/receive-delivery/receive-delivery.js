@@ -120,7 +120,11 @@ Page({
       receiverPhone: '',
       trackingNumber: '',
       pickupCode: ''
-    }
+    },
+    // 快递详情模态框
+    showDetailModal: false,
+    detailModalType: '', // 'request' 或 'package'
+    selectedDetail: {}
   },
 
   onLoad() {
@@ -523,5 +527,79 @@ Page({
       avgTime: (Math.floor(Math.random() * 20) + 20) + '分钟'
     }
     this.setData({ stats })
+  },
+
+  // 显示代取需求详情
+  showRequestDetails(e) {
+    const id = e.currentTarget.dataset.id
+    const request = this.data.recentRequests.find(item => item.id === id)
+    
+    if (request) {
+      this.setData({
+        showDetailModal: true,
+        detailModalType: 'request',
+        selectedDetail: request
+      })
+    }
+  },
+
+  // 显示快递包裹详情
+  showPackageDetails(e) {
+    const id = e.currentTarget.dataset.id
+    const packageItem = this.data.pickupPackages.find(item => item.id === id)
+    
+    if (packageItem) {
+      this.setData({
+        showDetailModal: true,
+        detailModalType: 'package',
+        selectedDetail: packageItem
+      })
+    }
+  },
+
+  // 关闭详情模态框
+  closeDetailModal() {
+    this.setData({
+      showDetailModal: false,
+      detailModalType: '',
+      selectedDetail: {}
+    })
+  },
+
+  // 从详情页面接单
+  takeOrderFromDetail(e) {
+    const id = e.currentTarget.dataset.id
+    this.closeDetailModal()
+    // 调用原有的接单函数
+    this.takeOrder({ currentTarget: { dataset: { id: id } } })
+  },
+
+  // 从详情页面选择单个快递
+  selectSinglePackage(e) {
+    const id = e.currentTarget.dataset.id
+    
+    // 关闭详情模态框
+    this.closeDetailModal()
+    
+    // 选择这个快递
+    const pickupPackages = this.data.pickupPackages.map(item => {
+      if (item.id === id && item.status === '待取件') {
+        return { ...item, selected: true }
+      } else {
+        return { ...item, selected: false }
+      }
+    })
+    
+    const selectedCount = pickupPackages.filter(item => item.selected).length
+    this.setData({
+      pickupPackages,
+      selectedCount
+    })
+    this.updatePickupStats()
+    
+    wx.showToast({
+      title: '已选择此快递',
+      icon: 'success'
+    })
   }
 })
