@@ -72,8 +72,13 @@
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 30rpx;
+  justify-content: flex-start;
+  padding: 25rpx 30rpx;
   border-bottom: 1rpx solid #f5f5f5;
+  min-height: 90rpx;
+  white-space: nowrap;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .menu-item:last-child {
@@ -89,17 +94,28 @@
   margin-right: 30rpx;
   width: 50rpx;
   text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40rpx;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 .menu-text {
-  flex: 1;
   font-size: 32rpx;
   color: #333;
-}
-
-.menu-arrow {
-  font-size: 28rpx;
-  color: #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
+  height: 40rpx;
+  vertical-align: middle;
 }
 
 .menu-badge {
@@ -109,7 +125,12 @@
   padding: 4rpx 8rpx;
   border-radius: 10rpx;
   margin-left: 10rpx;
-  margin-right: 10rpx;
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .stats-section {

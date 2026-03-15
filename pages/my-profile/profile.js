@@ -72,14 +72,6 @@ Page({
     })
   },
 
-  goToMyEarnings() {
-    wx.showModal({
-      title: '我的收益',
-      content: `累计收益：¥${this.data.stats.totalEarning}\n帮取收益：¥120\n推荐奖励：¥48`,
-      showCancel: false
-    })
-  },
-
   goToSettings() {
     wx.showActionSheet({
       itemList: ['消息通知', '隐私设置', '账号安全', '清除缓存'],

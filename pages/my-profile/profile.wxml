@@ -25,13 +25,11 @@
         <view class="menu-icon">👤</view>
         <view class="menu-text">登录</view>
         <view class="menu-badge">享受更多服务</view>
-        <view class="menu-arrow">></view>
       </view>
       
       <view class="menu-item logout" bindtap="handleLogout" wx:if="{{isLoggedIn}}">
         <view class="menu-icon">🚪</view>
         <view class="menu-text">退出登录</view>
-        <view class="menu-arrow">></view>
       </view>
     </view>
     
@@ -41,29 +39,20 @@
         <view class="menu-icon">📦</view>
         <view class="menu-text">我的收取快递</view>
         <view class="menu-badge" wx:if="{{stats.myReceiveOrders > 0}}">{{stats.myReceiveOrders}}</view>
-        <view class="menu-arrow">></view>
       </view>
       
       <view class="menu-item" bindtap="goToMyHelpOrders">
         <view class="menu-icon">🚚</view>
         <view class="menu-text">我的代取快递</view>
         <view class="menu-badge" wx:if="{{stats.myHelpOrders > 0}}">{{stats.myHelpOrders}}</view>
-        <view class="menu-arrow">></view>
       </view>
     </view>
     
     <!-- 其他功能 -->
     <view class="menu-group">
-      <view class="menu-item" bindtap="goToMyEarnings">
-        <view class="menu-icon">💰</view>
-        <view class="menu-text">我的钱包</view>
-        <view class="menu-arrow">></view>
-      </view>
-      
       <view class="menu-item" bindtap="goToSettings">
         <view class="menu-icon">⚙️</view>
         <view class="menu-text">设置</view>
-        <view class="menu-arrow">></view>
       </view>
     </view>
 
@@ -71,13 +60,11 @@
       <view class="menu-item" bindtap="goToHelp">
         <view class="menu-icon">❓</view>
         <view class="menu-text">帮助中心</view>
-        <view class="menu-arrow">></view>
       </view>
       
       <view class="menu-item" bindtap="goToAbout">
         <view class="menu-icon">ℹ️</view>
         <view class="menu-text">关于我们</view>
-        <view class="menu-arrow">></view>
       </view>
     </view>
   </view>
