@@ -131,13 +131,11 @@
     <view class="package-list">
       <view class="package-item" wx:for="{{availableRequests}}" wx:key="id">
         <view class="package-content">
-          <!-- 快递信息 -->
-          <view class="package-info">
-            <view class="package-header">
-              <view class="package-number">{{item.trackingNumber}}</view>
-              <view class="status-tag pending">{{item.status}}</view>
-            </view>
-          </view>
+          <!-- 快递单号 -->
+          <view class="package-number">{{item.trackingNumber}}</view>
+          
+          <!-- 快递状态 -->
+          <view class="status-tag pending">{{item.status}}</view>
 
           <!-- 接单按钮 -->
           <view class="request-action">
@@ -153,13 +151,6 @@
       <view class="empty-text">暂无可接单的快递</view>
     </view>
 
-    <!-- 返回按钮 -->
-    <view class="bottom-actions">
-      <button class="home-btn" bindtap="backToMain">
-        <view class="home-icon">🏠</view>
-        <text>返回首页</text>
-      </button>
-    </view>
   </view>
 
   <!-- 代取快递列表页面 -->
