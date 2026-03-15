@@ -26,16 +26,14 @@
 
   <!-- 功能菜单 -->
   <view class="menu-section">
-    <!-- 登录选项 -->
-    <view class="menu-group" wx:if="{{isLoggedIn}}">
-      <view class="menu-item logout" bindtap="handleLogout">
+    <!-- 所有功能统一 -->
+    <view class="menu-group">
+      <!-- 登录选项 -->
+      <view class="menu-item logout" wx:if="{{isLoggedIn}}" bindtap="handleLogout">
         <view class="menu-icon">🚪</view>
         <view class="menu-text">退出登录</view>
       </view>
-    </view>
-    
-    <!-- 快递相关功能 -->
-    <view class="menu-group">
+      
       <view class="menu-item" bindtap="goToMyReceiveOrders">
         <view class="menu-icon">📦</view>
         <view class="menu-text">我的收取快递</view>
@@ -47,17 +45,12 @@
         <view class="menu-text">我的代取快递</view>
         <view class="menu-badge" wx:if="{{stats.myHelpOrders > 0}}">{{stats.myHelpOrders}}</view>
       </view>
-    </view>
-    
-    <!-- 其他功能 -->
-    <view class="menu-group">
+      
       <view class="menu-item" bindtap="goToSettings">
         <view class="menu-icon">⚙️</view>
-        <view class="menu-text">设置</view>
+        <view class="menu-text">我的设置</view>
       </view>
-    </view>
-
-    <view class="menu-group">
+      
       <view class="menu-item" bindtap="goToHelp">
         <view class="menu-icon">❓</view>
         <view class="menu-text">帮助中心</view>
