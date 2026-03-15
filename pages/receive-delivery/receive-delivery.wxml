@@ -198,7 +198,7 @@
           <view class="package-info" bindtap="showPackageDetails" data-id="{{item.id}}">
             <view class="package-header">
               <view class="package-number">编号: {{index + 1}}</view>
-              <view class="status-tag {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
+              <view class="status-tag pickup-page-status {{item.status === '待取件' ? 'pending' : 'completed'}}">{{item.status}}</view>
             </view>
             
             <view class="detail-line">

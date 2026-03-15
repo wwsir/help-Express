@@ -670,6 +670,33 @@
   color: #0c5aa6;
 }
 
+/* 专门为"代取快递页"的快递状态标签垂直居中 - 使用专门的class */
+.pickup-page-status {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 40rpx !important;
+  line-height: 1 !important;
+  padding: 8rpx 16rpx !important;
+  margin-right: 15rpx !important;
+  border-radius: 12rpx !important;
+  font-size: 22rpx !important;
+  font-weight: 500 !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* 确保"代取快递页"状态标签的颜色样式 */
+.pickup-page-status.pending {
+  background-color: #fff3cd !important;
+  color: #856404 !important;
+}
+
+.pickup-page-status.completed {
+  background-color: #d1edff !important;
+  color: #0c5aa6 !important;
+}
+
 .package-details {
   margin-bottom: 0;
 }
