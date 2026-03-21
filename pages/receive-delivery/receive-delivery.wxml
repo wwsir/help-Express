@@ -343,8 +343,8 @@
             <view class="section-title">📦 基本信息</view>
             <view class="detail-grid">
               <view class="detail-row">
-                <view class="label">快递类型：</view>
-                <view class="value">{{selectedDetail.title}}</view>
+                <view class="label">快递单号：</view>
+                <view class="value">{{selectedDetail.trackingNumber}}</view>
               </view>
               <view class="detail-row">
                 <view class="label">取件地址：</view>
@@ -378,7 +378,7 @@
           <view class="detail-section">
             <view class="section-title">📋 服务说明</view>
             <view class="service-desc">
-              • 请准时到达指定取件地点\n• 核对快递信息后取件\n• 完成取件后及时联系收件人\n• 服务费用将在确认送达后支付
+            • 核对快递信息后取件\n• 完成取件后及时联系收件人\n• 服务费用将在确认送达后支付
             </view>
           </view>
 
