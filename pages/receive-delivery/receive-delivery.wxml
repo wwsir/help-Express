@@ -14,7 +14,7 @@
         <view class="option-icon">📦</view>
         <view class="option-info">
           <view class="option-title">收取快递</view>
-          <view class="option-desc">登记取件信息,让有交通工具的乡亲帮您取快递,每件2元代取费</view>
+          <view class="option-desc">登记取件信息,让有交通工具的乡亲帮您取快递,每件默认2元代取费</view>
         </view>
       </view>
 
@@ -59,20 +59,12 @@
     <view class="stats-section">
       <view class="stats-grid">
         <view class="stats-item">
-          <view class="stats-number">{{stats.todayRequests}}</view>
-          <view class="stats-label">今日需求</view>
-        </view>
-        <view class="stats-item">
-          <view class="stats-number">{{stats.activeHelpers}}</view>
+          <view class="stats-number">该村代取员</view>
           <view class="stats-label">在线帮手</view>
         </view>
         <view class="stats-item">
-          <view class="stats-number">{{stats.avgPrice}}</view>
-          <view class="stats-label">平均价格</view>
-        </view>
-        <view class="stats-item">
-          <view class="stats-number">{{stats.avgTime}}</view>
-          <view class="stats-label">平均时长</view>
+          <view class="stats-number">{{stats.todayRequests}}</view>
+          <view class="stats-label">取件需求</view>
         </view>
       </view>
     </view>
@@ -132,7 +124,7 @@
       <view class="package-item" wx:for="{{availableRequests}}" wx:key="id">
         <view class="package-content">
           <!-- 快递单号 -->
-          <view class="package-number">{{item.trackingNumber}}</view>
+          <view class="package-number" bindtap="showRequestDetails">{{item.trackingNumber}}</view>
           
           <!-- 快递状态 -->
           <view class="status-tag pending">{{item.status}}</view>

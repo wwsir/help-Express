@@ -48,8 +48,8 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "touristappid",
-  "projectname": "快递帮取小程序",
+  "appid": "wxb5bc64cd2fdcee64",
+  "projectname": "乡村快递互助小程序",
   "isGameTourist": false,
   "condition": {
     "search": {
