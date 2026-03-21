@@ -676,7 +676,12 @@ Page({
   // 显示代取需求详情
   showRequestDetails(e) {
     const id = e.currentTarget.dataset.id
-    const request = this.data.recentRequests.find(item => item.id === id)
+    let request = this.data.recentRequests.find(item => item.id === id)
+    
+    // 如果在recentRequests中没找到，则在availableRequests中查找
+    if (!request) {
+      request = this.data.availableRequests.find(item => item.id === id)
+    }
     
     if (request) {
       this.setData({

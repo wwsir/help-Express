@@ -124,7 +124,7 @@
       <view class="package-item" wx:for="{{availableRequests}}" wx:key="id">
         <view class="package-content">
           <!-- 快递单号 -->
-          <view class="package-number" bindtap="showRequestDetails">{{item.trackingNumber}}</view>
+          <view class="package-number" bindtap="showRequestDetails" data-id="{{item.id}}">{{item.trackingNumber}}</view>
           
           <!-- 快递状态 -->
           <view class="status-tag pending">{{item.status}}</view>
