@@ -356,21 +356,7 @@
               </view>
               <view class="detail-row">
                 <view class="label">服务费用：</view>
-                <view class="value price">¥{{selectedDetail.price}}</view>
-              </view>
-            </view>
-          </view>
-
-          <view class="detail-section">
-            <view class="section-title">📞 联系信息</view>
-            <view class="detail-grid">
-              <view class="detail-row">
-                <view class="label">发布者：</view>
-                <view class="value">{{selectedDetail.publisherName || '李先生'}}</view>
-              </view>
-              <view class="detail-row">
-                <view class="label">联系电话：</view>
-                <view class="value">{{selectedDetail.publisherPhone || '138****8888'}}</view>
+                <view class="value price">¥{{selectedDetail.price || '2' }}</view>
               </view>
             </view>
           </view>
@@ -378,7 +364,7 @@
           <view class="detail-section">
             <view class="section-title">📋 服务说明</view>
             <view class="service-desc">
-            • 核对快递信息后取件\n• 完成取件后及时联系收件人\n• 服务费用将在确认送达后支付
+            • 核对快递信息后取件\n• 服务费用将在确认送达后支付
             </view>
           </view>
 
