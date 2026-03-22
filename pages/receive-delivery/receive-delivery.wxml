@@ -348,11 +348,11 @@
               </view>
               <view class="detail-row">
                 <view class="label">取件地址：</view>
-                <view class="value">{{selectedDetail.location}}</view>
+                <view class="value">快递代收点</view>
               </view>
               <view class="detail-row">
                 <view class="label">期望时间：</view>
-                <view class="value">{{selectedDetail.time}}</view>
+                <view class="value">默认时间</view>
               </view>
               <view class="detail-row">
                 <view class="label">服务费用：</view>
